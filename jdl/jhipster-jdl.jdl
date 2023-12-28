@@ -1,0 +1,477 @@
+/** application {
+  *  config {
+  *     baseName onlineStore,
+  *     applicationType monolith,
+  *     packageName com.hs.ecommerce,
+  *     authenticationType jwt,
+  *     prodDatabaseType mysql,
+  *     clientFramework angular
+  *  }
+  *  entities *
+*}
+*/
+
+enum Performance{
+    VERY_WEAK,
+    WEAK,
+    MIDDLE,
+    WELL,
+    PERFECT,
+    EXCELLENT
+}
+
+enum ResourceType{
+    DOMAIN,
+    COMPONENT,
+    PAGE_URL
+}
+
+enum Verb{
+    NO_GRANT,
+    VIEW,
+    CREATE,
+    EDIT,
+    DELETE
+}
+
+/**
+ * Classification Types for Constants
+ * @author Hossein Sadeghi (hsadeghi78@gmail.com)
+ */
+entity ClassType(CLASS_TYPE){
+    title String required maxlength(200),
+    typeCode Integer required unique,
+    description String  maxlength(300),
+}
+
+/**
+ * Classification for Constants
+ * @author Hossein Sadeghi (hsadeghi78@gmail.com)
+ */
+entity Classification(CLASSIFICATION){
+    title String required maxlength(200),
+    classCode String required maxlength(25),
+    description String  maxlength(300),
+    /** such as fa_IR, en_US, ar_AE, ar_SA and ..... */
+    languageClassId Long required
+}
+
+/**
+ * a view from join classType and classification
+ * @author Hossein Sadeghi (hsadeghi78@gmail.com)
+ */
+entity VwClassification(VW_CLASSIFICATION) {
+    title String required maxlength(200),
+    classCode String required maxlength(25),
+    description String  maxlength(300),
+    languageClassId Long required,
+    typeTitle String required maxlength(200),
+    typeCode Integer required unique,
+    typeDesc String  maxlength(300)
+}
+
+/**
+ * 4 field fixed
+ * @author Hossein Sadeghi (hsadeghi78@gmail.com)
+ */
+entity Party(PARTY) {
+    title String required maxlength(200),
+    partyCode String required maxlength(100),
+    tradeTitle String required maxlength(200),
+    activationDate LocalDate required,
+    expirationDate LocalDate ,
+    activationStatus Boolean required,
+    photo ImageBlob ,
+    /** PersonType : TRUE>REAL_PERSON, FALSE>LEGAL_PERSON*/
+    personType Boolean required
+}
+
+/**
+ * 4 field fixed
+ * @author Hossein Sadeghi (hsadeghi78@gmail.com)
+ */
+entity Campaign(CAMPAIGN){
+    title String required maxlength(200),
+    startDate LocalDate required,
+    endDate LocalDate required,
+    photo  ImageBlob required maxbytes(307200),
+    description String maxlength(1000)
+}
+
+/**
+ * Comment for manage comment on paries and products
+ * 4 field fixed
+ * @author Hossein Sadeghi (hsadeghi78@gmail.com)
+ */
+entity UserComment(USER_COMMENT) {
+    rating Float required,
+    visible Boolean required,
+    description String maxlength(2000)
+}
+
+/**
+ * For management Gographic Division in 4 level(Country,Province,County,City)
+ * @author Hossein Sadeghi (hsadeghi78@gmail.com)
+ */
+entity GeoDivision(GEO_DIVISION){
+    name String required maxlength(200),
+    code Long required unique,
+    level Integer required
+}
+
+/**
+ * Locations of All Partyies
+ * @author Hossein Sadeghi (hsadeghi78@gmail.com)
+ */
+entity Location(LOCATION) {
+    /** typeClass WORK,HOME,BRANCH*/
+    typeClassId Long required,
+    title String required maxlength(200),
+    lat Double required,
+    lon Double required,
+    street1 String maxlength(200),
+    street2 String maxlength(200),
+    street3 String maxlength(200),
+    buildingNo Integer required,
+    buildingName String maxlength(100),
+    floor Integer,
+    unit Integer required,
+    postalCode String required maxlength(12),
+    other String
+}
+
+/**
+ * 4 field fixed
+ * @author Hossein Sadeghi (hsadeghi78@gmail.com)
+ */
+entity Contact(CONTACT) {
+    contactValue String required ,
+    /** typeClass TELEPHONE, MOBILE, FAX, EMAIL, PAGER*/
+    typeClassId Long required, //
+    prefix String maxlength(7),
+    description String maxlength(500)
+}
+
+/**
+ * Category And subcategories
+ * @author Hossein Sadeghi (hsadeghi78@gmail.com)
+ */
+entity Category(CATEGORY){
+    title String required maxlength(100),
+    code String required maxlength(10),
+    hasChild Boolean required,
+    level Integer required,
+    keywords String maxlength(500),
+    description String maxlength(500)
+}
+
+/**
+ * 4 field fixed and Party, prices, items
+ * @author Hossein Sadeghi (hsadeghi78@gmail.com)
+ */
+entity Product(PRODUCT) {
+    name String required maxlength(500),
+    /** Type is optional for some of kinds of product*/
+    typeClassId Long ,
+    /** brand of product such as SAMSUNG, APPLE, DELL, ....*/
+    brandClassId Long ,
+    /** bitwiz of sizes: 34,35,36,40,......*/
+    sizee String maxlength(100),
+    /** XSMALL, SMALL, MEDIUM, LARG, XLARG, XXLARG, XXXLARG, FREE */
+    regularSizeClassId Long required,
+    /** such as fa_IR, en_US, ar_AE, ar_SA and ..... */
+    languageClassId Long required,
+    description String maxlength(2500),
+    keywords String maxlength(500),
+    photo1 ImageBlob required maxbytes(307200)
+    
+    
+    
+    
+    /** Product Count as per Party */
+    count Double required,
+    discount Float,
+    /** original price is before discount */
+    originalPrice Double required,
+    /** producer price is after discount */
+    finalPrice Double required,
+    publishDate LocalDate required,
+    /** first time for deliver or send product */
+    transportDate LocalDate required,
+    /** such as IRR,IRT, AED,USD and ..... */
+    currencyClassId Long required,
+    /** such as fa_IR, en_US, ar_AE, ar_SA and ..... */
+    languageClassId Long required,
+    bonus Float,
+    /** warrantyClass, ORIGINALITY, KARABI_KALA, BATRY, DURATION(1Year,2year)*/
+    warrantyClassId Long,
+    /** deliveryPlaceClass, ON_SITE, IN_STORE,CUSTOMER_ADDRESS */
+    deliveryPlaceClassId Long,
+    /** paymentPlaceClass, ONLINE,CREDIT_CARD, CASH_ON_DELIVERY, WALLET*/
+    paymentPlaceClassId Long,
+    /** keyfiyate va karaee mahsol*/
+    performance Performance,
+    /** originalityClass, ORIGINAL, HIGH_COPY,FAKE*/
+    originalityClassId Long,
+    /** Comma Seprated keywords for search and tags*/
+    keywords String maxlength(500),
+    /** mizane rezayat */
+    satisfaction Float,
+    /** new or used product */
+    used Boolean required
+}
+
+/** Json Of material, fields is dynamic*/
+entity ConsumeMaterial(CONSUME_MATERIAL) {
+    /** typeClass, NATURAL_COLOR, VEGETABLES, DAIRY and ..... (Base On business maybe change) */
+    typeClassId Long required,
+    name String maxlength(100) required,
+    value String maxlength(800) required
+}
+
+
+/**
+ * Extra Information Or attributes Of Product
+ * @author Hossein Sadeghi (hsadeghi78@gmail.com)
+ */
+entity ProductItem(PRODUCT_ITEM){
+    /** typeClass, HEADER, BASE, TECHNICAL, DESIGN, MEMORY, CPU and ..... (Base On business maybe change) */
+    typeClassId Long required,
+    name String maxlength(100) required,
+    value String maxlength(800) required
+}
+
+/**
+ * 4 field fixed
+ * @author Hossein Sadeghi (hsadeghi78@gmail.com)
+ * after per update on Product on object add to tfhis table. be handling in DFenging and view for this object Only for admin
+ */
+entity ProductHistory(PRICE_HISTORY) {
+    name String required maxlength(500),
+    /** Type is optional for some of kinds of product*/
+    typeClassId Long ,
+    /** brand of product such as SAMSUNG, APPLE, DELL, ....*/
+    brandClassId Long ,
+    /** bitwiz of sizes: 34,35,36,40,......*/
+    sizee String maxlength(100),
+    /** XSMALL, SMALL, MEDIUM, LARG, XLARG, XXLARG, XXXLARG, FREE */
+    regularSizeClassId Long required,
+    /** such as fa_IR, en_US, ar_AE, ar_SA and ..... */
+    languageClassId Long required,
+    description String maxlength(2500),
+    keywords String maxlength(500),
+    photo1 ImageBlob required maxbytes(307200)
+         
+    
+    /** Product Count as per Party */
+    count Double required,
+    discount Float,
+    /** original price is before discount */
+    originalPrice Double required,
+    /** producer price is after discount */
+    finalPrice Double required,
+    publishDate LocalDate required,
+    /** first time for deliver or send product */
+    transportDate LocalDate required,
+    /** such as IRR,IRT, AED,USD and ..... */
+    currencyClassId Long required,
+    /** such as fa_IR, en_US, ar_AE, ar_SA and ..... */
+    languageClassId Long required,
+    bonus Float,
+    /** warrantyClass, ORIGINALITY, KARABI_KALA, BATRY, DURATION(1Year,2year)*/
+    warrantyClassId Long,
+    /** deliveryPlaceClass, ON_SITE, IN_STORE,CUSTOMER_ADDRESS */
+    deliveryPlaceClassId Long,
+    /** paymentPlaceClass, ONLINE,CREDIT_CARD, CASH_ON_DELIVERY, WALLET*/
+    paymentPlaceClassId Long,
+    /** keyfiyate va karaee mahsol*/
+    performance Performance,
+    /** originalityClass, ORIGINAL, HIGH_COPY,FAKE*/
+    originalityClassId Long,
+    /** Comma Seprated keywords for search and tags*/
+    keywords String maxlength(500),
+    /** mizane rezayat */
+    satisfaction Float,
+    /** new or used product */
+    used Boolean required
+    categoryId Long required,
+    partyId Long required,
+    productId Long required,
+    priceId Long required,
+    campaignId Long
+}
+
+
+/**
+ * 4 field fixed
+ * @author Hossein Sadeghi (hsadeghi78@gmail.com)
+ */
+entity Agreement(AGREEMENT){
+    name String required,
+    startDate LocalDate required,
+    endDate LocalDate required,
+    /**  activationStatusClass PRE_REGISTER,SUSPEND,FINAL,ACTIVE,EXPIRE */
+    activationStatusClassId Long required,
+    infrastructureBenefit Double required,
+    extraBenefit Double
+}
+
+/**
+ * 4 field fixed
+ * @author Hossein Sadeghi (hsadeghi78@gmail.com)
+ */
+entity Factor(FACTOR) {
+    title String required maxlength(200),
+    factorCode String required maxlength(100) unique,
+    /**  FactorStatus{PURCHASE_ORDER, INITIATE, SUSPEND, UPDATED, FINAL, PREPARING, READY_TO_DELIVERY, DELIVERY_SUCCESS, DELIVERY_FAIL, CANCEL, DELETED, INDOOR, OUTDOOR}*/
+    lastStatusClassId Long required,
+    /** for FREE, UNPAID, PREPAID_PARTIAL, PREPAID_COMPLETE, POSTPAID, SETTLEMENT */
+    paymentStateClassId Long required,
+    categoryClassId Long,
+    totalPrice Double required,
+    discount Double ,
+    discountCode String ,
+    finalTax Double ,
+    payable Double required,
+    description String  maxlength(1000)
+}
+
+/**
+ * 4 field fixed
+ * @author Hossein Sadeghi (hsadeghi78@gmail.com)
+ */
+entity FactorItem (FACTOR_ITEM){
+    rowNum Integer required,
+    title String required maxlength(200),
+    count Integer required,
+    discount Double ,
+    tax Double ,
+    description String  maxlength(300)
+}
+
+/**
+ * 4 field fixed
+ * @author Hossein Sadeghi (hsadeghi78@gmail.com)
+ */
+entity Criticism(CRITICISM) {
+    fullName String required maxlength(150),
+    email String maxlength(150)
+    contactNumber String maxlength(15),
+    description String required maxlength(3000)
+}
+
+/**
+ * @author Hossein Sadeghi (hsadeghi78@gmail.com)
+ */
+entity FileDocument(FILE_DOCUMENT) {
+    fileName String required maxlength(250),
+    fileContent AnyBlob required,
+    filePath String maxlength(2000),
+    description String required maxlength(3000)
+}
+
+/**
+ * @author Hossein Sadeghi (hsadeghi78@gmail.com)
+ */
+entity MyAuthority(MY_AUTHORITY){
+    name String required maxlength(50) unique,
+    displayName String required maxlength(100)
+}
+
+/**
+ * 4 field fixed
+ * @author Hossein Sadeghi (hsadeghi78@gmail.com)
+ */
+entity Resource (RESOURCE){
+    name String required maxlength(50),
+    displayName String required maxlength(300),
+    apiUri String required maxlength(1000),
+    resourceType ResourceType required
+}
+
+/**
+ * @author Hossein Sadeghi (hsadeghi78@gmail.com)
+ */
+entity ResourceAuthority (RESOURCE_AUTHORITY) {
+    verb Verb required
+}
+
+entity Config(BS_CONFIG){
+    displayName String maxlength(300),
+    code String maxlength(300),
+    value String maxlength(1500)
+}
+//entity User{}
+
+/**
+ * 4 field fixed
+ * @author Hossein Sadeghi (hsadeghi78@gmail.com)
+ */
+entity UserFavorite{}
+
+/**
+ * 4 field fixed
+ * @author Hossein Sadeghi (hsadeghi78@gmail.com)
+ */
+entity Wallet {
+    /** TransactionTypeClass for ONLINE_RECHARGE, FACTOR_SETTLEMENT, SUBSCRIPTION_FEE*/
+    transTypeClassId Long,
+    stock Double required,
+    description String maxlength(1000)
+    deposit Double,
+    withdrawal Double
+}
+
+
+// defining multiple OneToMany relationships with comments
+relationship OneToMany {
+    GeoDivision{children} to GeoDivision{parent(name)},
+    GeoDivision{locations} to Location{geoDivision required},
+    Category{products} to Product{category(title) required},
+    Category{children} to Category{parent(title)},
+    ClassType{classifications} to Classification{classType(title) required},
+    Party{buyerFactors} to Factor{buyerParty(title)},
+    Party{sellerFactors} to Factor{sellerParty(title)},
+    Product{productItems} to ProductItem{product(name) required},
+    Factor{factorItems} to FactorItem{factor required},
+    Party{UserComments} to UserComment{party(title)},
+    Product{UserComments} to UserComment{product(name)},
+    Factor{UserComments} to UserComment{factor},
+    UserComment{children} to UserComment{parent},
+    Party{products} to Product{party(title)},
+    Party{providerAgreements} to Agreement{provider(title)},
+    Party{consumerAgreements} to Agreement{consumer(title)},
+    Party{contacts} to Contact{party(title)},
+    Party{locations} to Location{party(title)},
+    Product{children} to Product{parent(name)},
+    //User{favotites} to UserFavorite{user required},
+    Product{favorites} to UserFavorite{product(name)},
+    //Product{prices} to Price{product(name) required},
+    Product{materials} to ConsumeMaterial{product(name) required},
+    Party{products} to Product{party(title)},
+    Product{factorItems} to FactorItem{product(name) required},
+    //User{wallets} to Wallet{user}
+    MyAuthority{children} to MyAuthority{parent(name)},
+    Resource{resourceAuthorities} to ResourceAuthority{resource(displayName)},
+    MyAuthority{resourceAuthorities} to ResourceAuthority{myAuthority(displayName)},
+
+}
+
+relationship OneToOne {
+    Factor{location required} to Location{factor required} //with jpaDerivedIdentifier,
+}
+
+relationship ManyToMany {
+    Campaign{products} to Product{campaigns},
+    Product{documents} to FileDocument{prices},
+}
+
+// Set pagination options
+paginate * with infinite-scroll
+paginate * with pagination
+// Use Data Transfer Objects (DTO)
+dto * with mapstruct
+// Set service options to all except few
+service all with serviceClass
+skipClient PriceHistory,VwClassification
+filter all
