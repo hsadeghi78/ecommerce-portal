@@ -1,7 +1,8 @@
-@import 'bootstrap-variables';
+@import 'content/scss/bootstrap-variables';
 @import 'bootstrap/scss/functions';
 @import 'bootswatch/dist/materia/variables';
 @import 'bootstrap/scss/variables';
+@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
 
 /* ==============================================================
 Bootstrap tweaks
