@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <!--
+        Added the constraints for entity GeoDivision.
+    -->
+    <changeSet id="20231228115210-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="parent_id"
+                                 baseTableName="geo_division"
+                                 constraintName="fk_geo_division__parent_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="geo_division"
+                                 />
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,70 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="agreement">
+      <h2 data-cy="agreementDetailsHeading"><span jhiTranslate="ecommercePortalApp.agreement.detail.title">Agreement</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ agreement.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="ecommercePortalApp.agreement.name">Name</span></dt>
+        <dd>
+          <span>{{ agreement.name }}</span>
+        </dd>
+        <dt><span jhiTranslate="ecommercePortalApp.agreement.startDate">Start Date</span></dt>
+        <dd>
+          <span>{{ agreement.startDate | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="ecommercePortalApp.agreement.endDate">End Date</span></dt>
+        <dd>
+          <span>{{ agreement.endDate | formatMediumDate }}</span>
+        </dd>
+        <dt>
+          <span
+            jhiTranslate="ecommercePortalApp.agreement.activationStatusClassId"
+            [ngbTooltip]="'ecommercePortalApp.agreement.help.activationStatusClassId' | translate"
+            >Activation Status Class Id</span
+          >
+        </dt>
+        <dd>
+          <span>{{ agreement.activationStatusClassId }}</span>
+        </dd>
+        <dt><span jhiTranslate="ecommercePortalApp.agreement.infrastructureBenefit">Infrastructure Benefit</span></dt>
+        <dd>
+          <span>{{ agreement.infrastructureBenefit }}</span>
+        </dd>
+        <dt><span jhiTranslate="ecommercePortalApp.agreement.extraBenefit">Extra Benefit</span></dt>
+        <dd>
+          <span>{{ agreement.extraBenefit }}</span>
+        </dd>
+        <dt><span jhiTranslate="ecommercePortalApp.agreement.provider">Provider</span></dt>
+        <dd>
+          <div *ngIf="agreement.provider">
+            <a [routerLink]="['/party', agreement.provider.id, 'view']">{{ agreement.provider.title }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="ecommercePortalApp.agreement.consumer">Consumer</span></dt>
+        <dd>
+          <div *ngIf="agreement.consumer">
+            <a [routerLink]="['/party', agreement.consumer.id, 'view']">{{ agreement.consumer.title }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/agreement', agreement.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

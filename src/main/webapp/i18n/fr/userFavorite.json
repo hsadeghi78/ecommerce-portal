@@ -1,0 +1,24 @@
+{
+  "ecommercePortalApp": {
+    "userFavorite": {
+      "home": {
+        "title": "UserFavorites",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau User Favorite",
+        "createOrEditLabel": "Créer ou éditer un User Favorite",
+        "notFound": "Aucun User Favorite trouvé"
+      },
+      "created": "Un nouveau User Favorite a été créé avec l'identifiant {{ param }}",
+      "updated": "Le User Favorite avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le User Favorite avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le User Favorite {{ id }} ?"
+      },
+      "detail": {
+        "title": "User Favorite"
+      },
+      "id": "ID",
+      "product": "Product"
+    }
+  }
+}

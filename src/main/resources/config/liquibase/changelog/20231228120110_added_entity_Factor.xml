@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <!--
+        Added the entity Factor.
+    -->
+    <changeSet id="20231228120110-1" author="jhipster">
+        <createTable tableName="factor" remarks="4 field fixed\n@author Hossein Sadeghi (hsadeghi78@gmail.com)">
+            <column name="id" type="bigint" autoIncrement="true" startWith="1500">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="title" type="varchar(200)">
+                <constraints nullable="false" />
+            </column>
+            <column name="factor_code" type="varchar(100)">
+                <constraints nullable="false" unique="true" uniqueConstraintName="ux_factor__factor_code" />
+            </column>
+            <column name="last_status_class_id" type="bigint" remarks="FactorStatus{PURCHASE_ORDER, INITIATE, SUSPEND, UPDATED, FINAL, PREPARING, READY_TO_DELIVERY, DELIVERY_SUCCESS, DELIVERY_FAIL, CANCEL, DELETED, INDOOR, OUTDOOR}">
+                <constraints nullable="false" />
+            </column>
+            <column name="payment_state_class_id" type="bigint" remarks="for FREE, UNPAID, PREPAID_PARTIAL, PREPAID_COMPLETE, POSTPAID, SETTLEMENT">
+                <constraints nullable="false" />
+            </column>
+            <column name="category_class_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="total_price" type="double">
+                <constraints nullable="false" />
+            </column>
+            <column name="discount" type="double">
+                <constraints nullable="true" />
+            </column>
+            <column name="discount_code" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="final_tax" type="double">
+                <constraints nullable="true" />
+            </column>
+            <column name="payable" type="double">
+                <constraints nullable="false" />
+            </column>
+            <column name="description" type="varchar(1000)">
+                <constraints nullable="true" />
+            </column>
+            <column name="location_id" type="bigint">
+                <constraints nullable="false" unique="true" uniqueConstraintName="ux_factor__location_id" />
+            </column>
+            <column name="buyer_party_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="seller_party_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="created_by" type="varchar(50)"/>
+            <column name="created_date" type="timestamp"/>
+            <column name="last_modified_by" type="varchar(50)"/>
+            <column name="last_modified_date" type="timestamp"/>
+            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
+        </createTable>
+    </changeSet>
+
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
+
+    <!--
+        Load sample data generated with Faker.js
+        - This data can be easily edited using a CSV editor (or even MS Excel) and
+          is located in the 'src/main/resources/config/liquibase/fake-data' directory
+        - By default this data is applied when running with the JHipster 'dev' profile.
+          This can be customized by adding or removing 'faker' in the 'spring.liquibase.contexts'
+          Spring Boot configuration key.
+    -->
+    <changeSet id="20231228120110-1-data" author="jhipster" context="faker">
+        <loadData
+                  file="config/liquibase/fake-data/factor.csv"
+                  separator=";"
+                  tableName="factor"
+                  usePreparedStatements="true">
+            <column name="id" type="numeric"/>
+            <column name="title" type="string"/>
+            <column name="factor_code" type="string"/>
+            <column name="last_status_class_id" type="numeric"/>
+            <column name="payment_state_class_id" type="numeric"/>
+            <column name="category_class_id" type="numeric"/>
+            <column name="total_price" type="numeric"/>
+            <column name="discount" type="numeric"/>
+            <column name="discount_code" type="string"/>
+            <column name="final_tax" type="numeric"/>
+            <column name="payable" type="numeric"/>
+            <column name="description" type="string"/>
+            <column name="location_id" type="numeric"/>
+            <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
+        </loadData>
+    </changeSet>
+</databaseChangeLog>

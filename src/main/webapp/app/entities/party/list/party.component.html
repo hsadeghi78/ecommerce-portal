@@ -1,0 +1,272 @@
+<div>
+  <h2 id="page-heading" data-cy="PartyHeading">
+    <span jhiTranslate="ecommercePortalApp.party.home.title">Parties</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="ecommercePortalApp.party.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-party"
+        [routerLink]="['/party/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="ecommercePortalApp.party.home.createLabel">Create a new Party</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <jhi-filter [filters]="filters"></jhi-filter>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="parties?.length === 0">
+    <span jhiTranslate="ecommercePortalApp.party.home.notFound">No Parties found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="parties && parties.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span jhiTranslate="global.field.id">ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="title">
+            <div class="d-flex">
+              <span jhiTranslate="ecommercePortalApp.party.title">Title</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="partyCode">
+            <div class="d-flex">
+              <span jhiTranslate="ecommercePortalApp.party.partyCode">Party Code</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="tradeTitle">
+            <div class="d-flex">
+              <span jhiTranslate="ecommercePortalApp.party.tradeTitle">Trade Title</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="activationDate">
+            <div class="d-flex">
+              <span jhiTranslate="ecommercePortalApp.party.activationDate">Activation Date</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="expirationDate">
+            <div class="d-flex">
+              <span jhiTranslate="ecommercePortalApp.party.expirationDate">Expiration Date</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="activationStatus">
+            <div class="d-flex">
+              <span jhiTranslate="ecommercePortalApp.party.activationStatus">Activation Status</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="photo">
+            <div class="d-flex">
+              <span jhiTranslate="ecommercePortalApp.party.photo">Photo</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="personType">
+            <div class="d-flex">
+              <span jhiTranslate="ecommercePortalApp.party.personType">Person Type</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let party of parties; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/party', party.id, 'view']">{{ party.id }}</a>
+          </td>
+          <td>{{ party.title }}</td>
+          <td>{{ party.partyCode }}</td>
+          <td>{{ party.tradeTitle }}</td>
+          <td>{{ party.activationDate | formatMediumDate }}</td>
+          <td>{{ party.expirationDate | formatMediumDate }}</td>
+          <td>{{ party.activationStatus }}</td>
+          <td>
+            <a *ngIf="party.photo" (click)="openFile(party.photo, party.photoContentType)">
+              <img [src]="'data:' + party.photoContentType + ';base64,' + party.photo" style="max-height: 30px" alt="party image" />
+            </a>
+            <span *ngIf="party.photo">{{ party.photoContentType }}, {{ byteSize(party.photo) }}</span>
+          </td>
+          <td>{{ party.personType }}</td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/factor']"
+                [queryParams]="{ 'filter[buyerPartyId.in]': party.id }"
+                class="btn btn-info btn-sm"
+                data-cy="filterOtherEntityButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span
+                  class="d-none d-md-inline"
+                  jhiTranslate="entity.action.show"
+                  [translateValues]="{ otherEntity: ('ecommercePortalApp.party.buyerFactors' | translate) }"
+                  >Show Factor</span
+                >
+              </button>
+              <button
+                type="submit"
+                [routerLink]="['/factor']"
+                [queryParams]="{ 'filter[sellerPartyId.in]': party.id }"
+                class="btn btn-info btn-sm"
+                data-cy="filterOtherEntityButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span
+                  class="d-none d-md-inline"
+                  jhiTranslate="entity.action.show"
+                  [translateValues]="{ otherEntity: ('ecommercePortalApp.party.sellerFactors' | translate) }"
+                  >Show Factor</span
+                >
+              </button>
+              <button
+                type="submit"
+                [routerLink]="['/user-comment']"
+                [queryParams]="{ 'filter[partyId.in]': party.id }"
+                class="btn btn-info btn-sm"
+                data-cy="filterOtherEntityButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span
+                  class="d-none d-md-inline"
+                  jhiTranslate="entity.action.show"
+                  [translateValues]="{ otherEntity: ('ecommercePortalApp.party.userComments' | translate) }"
+                  >Show User Comment</span
+                >
+              </button>
+              <button
+                type="submit"
+                [routerLink]="['/product']"
+                [queryParams]="{ 'filter[partyId.in]': party.id }"
+                class="btn btn-info btn-sm"
+                data-cy="filterOtherEntityButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span
+                  class="d-none d-md-inline"
+                  jhiTranslate="entity.action.show"
+                  [translateValues]="{ otherEntity: ('ecommercePortalApp.party.products' | translate) }"
+                  >Show Product</span
+                >
+              </button>
+              <button
+                type="submit"
+                [routerLink]="['/agreement']"
+                [queryParams]="{ 'filter[providerId.in]': party.id }"
+                class="btn btn-info btn-sm"
+                data-cy="filterOtherEntityButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span
+                  class="d-none d-md-inline"
+                  jhiTranslate="entity.action.show"
+                  [translateValues]="{ otherEntity: ('ecommercePortalApp.party.providerAgreements' | translate) }"
+                  >Show Agreement</span
+                >
+              </button>
+              <button
+                type="submit"
+                [routerLink]="['/agreement']"
+                [queryParams]="{ 'filter[consumerId.in]': party.id }"
+                class="btn btn-info btn-sm"
+                data-cy="filterOtherEntityButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span
+                  class="d-none d-md-inline"
+                  jhiTranslate="entity.action.show"
+                  [translateValues]="{ otherEntity: ('ecommercePortalApp.party.consumerAgreements' | translate) }"
+                  >Show Agreement</span
+                >
+              </button>
+              <button
+                type="submit"
+                [routerLink]="['/contact']"
+                [queryParams]="{ 'filter[partyId.in]': party.id }"
+                class="btn btn-info btn-sm"
+                data-cy="filterOtherEntityButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span
+                  class="d-none d-md-inline"
+                  jhiTranslate="entity.action.show"
+                  [translateValues]="{ otherEntity: ('ecommercePortalApp.party.contacts' | translate) }"
+                  >Show Contact</span
+                >
+              </button>
+              <button
+                type="submit"
+                [routerLink]="['/location']"
+                [queryParams]="{ 'filter[partyId.in]': party.id }"
+                class="btn btn-info btn-sm"
+                data-cy="filterOtherEntityButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span
+                  class="d-none d-md-inline"
+                  jhiTranslate="entity.action.show"
+                  [translateValues]="{ otherEntity: ('ecommercePortalApp.party.locations' | translate) }"
+                  >Show Location</span
+                >
+              </button>
+              <a [routerLink]="['/party', party.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </a>
+
+              <a [routerLink]="['/party', party.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </a>
+
+              <button type="submit" (click)="delete(party)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="parties && parties.length > 0">
+    <div class="d-flex justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [page]="page"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="navigateToPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

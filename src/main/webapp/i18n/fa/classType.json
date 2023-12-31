@@ -1,0 +1,27 @@
+{
+  "ecommercePortalApp": {
+    "classType": {
+      "home": {
+        "title": "Class Types",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Class Type",
+        "createOrEditLabel": "Create or edit a Class Type",
+        "notFound": "No Class Types found"
+      },
+      "created": "A new Class Type is created with identifier {{ param }}",
+      "updated": "A Class Type is updated with identifier {{ param }}",
+      "deleted": "A Class Type is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Class Type {{ id }}?"
+      },
+      "detail": {
+        "title": "Class Type"
+      },
+      "id": "ID",
+      "title": "Title",
+      "typeCode": "Type Code",
+      "description": "Description",
+      "classifications": "Classifications"
+    }
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "ecommercePortalApp": {
+    "factor": {
+      "home": {
+        "title": "Factors",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Factor",
+        "createOrEditLabel": "Create or edit a Factor",
+        "notFound": "No Factors found"
+      },
+      "created": "A new Factor is created with identifier {{ param }}",
+      "updated": "A Factor is updated with identifier {{ param }}",
+      "deleted": "A Factor is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Factor {{ id }}?"
+      },
+      "detail": {
+        "title": "Factor"
+      },
+      "id": "ID",
+      "title": "Title",
+      "factorCode": "Factor Code",
+      "lastStatusClassId": "Last Status Class Id",
+      "paymentStateClassId": "Payment State Class Id",
+      "categoryClassId": "Category Class Id",
+      "totalPrice": "Total Price",
+      "discount": "Discount",
+      "discountCode": "Discount Code",
+      "finalTax": "Final Tax",
+      "payable": "Payable",
+      "description": "Description",
+      "location": "Location",
+      "factorItems": "Factor Items",
+      "userComments": "User Comments",
+      "buyerParty": "Buyer Party",
+      "sellerParty": "Seller Party",
+      "help": {
+        "lastStatusClassId": "FactorStatus{PURCHASE_ORDER, INITIATE, SUSPEND, UPDATED, FINAL, PREPARING, READY_TO_DELIVERY, DELIVERY_SUCCESS, DELIVERY_FAIL, CANCEL, DELETED, INDOOR, OUTDOOR}",
+        "paymentStateClassId": "for FREE, UNPAID, PREPAID_PARTIAL, PREPAID_COMPLETE, POSTPAID, SETTLEMENT"
+      }
+    }
+  }
+}

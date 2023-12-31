@@ -1,0 +1,402 @@
+<div>
+  <h2 id="page-heading" data-cy="ProductHeading">
+    <span jhiTranslate="ecommercePortalApp.product.home.title">Products</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="ecommercePortalApp.product.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-product"
+        [routerLink]="['/product/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="ecommercePortalApp.product.home.createLabel">Create a new Product</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <jhi-filter [filters]="filters"></jhi-filter>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="products?.length === 0">
+    <span jhiTranslate="ecommercePortalApp.product.home.notFound">No Products found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="products && products.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span jhiTranslate="global.field.id">ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="name">
+            <div class="d-flex">
+              <span jhiTranslate="ecommercePortalApp.product.name">Name</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="typeClassId">
+            <div class="d-flex">
+              <span jhiTranslate="ecommercePortalApp.product.typeClassId">Type Class Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="brandClassId">
+            <div class="d-flex">
+              <span jhiTranslate="ecommercePortalApp.product.brandClassId">Brand Class Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="sizee">
+            <div class="d-flex">
+              <span jhiTranslate="ecommercePortalApp.product.sizee">Sizee</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="regularSizeClassId">
+            <div class="d-flex">
+              <span jhiTranslate="ecommercePortalApp.product.regularSizeClassId">Regular Size Class Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="languageClassId">
+            <div class="d-flex">
+              <span jhiTranslate="ecommercePortalApp.product.languageClassId">Language Class Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="description">
+            <div class="d-flex">
+              <span jhiTranslate="ecommercePortalApp.product.description">Description</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="keywords">
+            <div class="d-flex">
+              <span jhiTranslate="ecommercePortalApp.product.keywords">Keywords</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="photo1">
+            <div class="d-flex">
+              <span jhiTranslate="ecommercePortalApp.product.photo1">Photo 1</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="count">
+            <div class="d-flex">
+              <span jhiTranslate="ecommercePortalApp.product.count">Count</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="discount">
+            <div class="d-flex">
+              <span jhiTranslate="ecommercePortalApp.product.discount">Discount</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="originalPrice">
+            <div class="d-flex">
+              <span jhiTranslate="ecommercePortalApp.product.originalPrice">Original Price</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="finalPrice">
+            <div class="d-flex">
+              <span jhiTranslate="ecommercePortalApp.product.finalPrice">Final Price</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="publishDate">
+            <div class="d-flex">
+              <span jhiTranslate="ecommercePortalApp.product.publishDate">Publish Date</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="transportDate">
+            <div class="d-flex">
+              <span jhiTranslate="ecommercePortalApp.product.transportDate">Transport Date</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="currencyClassId">
+            <div class="d-flex">
+              <span jhiTranslate="ecommercePortalApp.product.currencyClassId">Currency Class Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="bonus">
+            <div class="d-flex">
+              <span jhiTranslate="ecommercePortalApp.product.bonus">Bonus</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="warrantyClassId">
+            <div class="d-flex">
+              <span jhiTranslate="ecommercePortalApp.product.warrantyClassId">Warranty Class Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="deliveryPlaceClassId">
+            <div class="d-flex">
+              <span jhiTranslate="ecommercePortalApp.product.deliveryPlaceClassId">Delivery Place Class Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="paymentPlaceClassId">
+            <div class="d-flex">
+              <span jhiTranslate="ecommercePortalApp.product.paymentPlaceClassId">Payment Place Class Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="performance">
+            <div class="d-flex">
+              <span jhiTranslate="ecommercePortalApp.product.performance">Performance</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="originalityClassId">
+            <div class="d-flex">
+              <span jhiTranslate="ecommercePortalApp.product.originalityClassId">Originality Class Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="satisfaction">
+            <div class="d-flex">
+              <span jhiTranslate="ecommercePortalApp.product.satisfaction">Satisfaction</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="used">
+            <div class="d-flex">
+              <span jhiTranslate="ecommercePortalApp.product.used">Used</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="category.title">
+            <div class="d-flex">
+              <span jhiTranslate="ecommercePortalApp.product.category">Category</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="party.title">
+            <div class="d-flex">
+              <span jhiTranslate="ecommercePortalApp.product.party">Party</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="parent.name">
+            <div class="d-flex">
+              <span jhiTranslate="ecommercePortalApp.product.parent">Parent</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of products; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/product', product.id, 'view']">{{ product.id }}</a>
+          </td>
+          <td>{{ product.name }}</td>
+          <td>{{ product.typeClassId }}</td>
+          <td>{{ product.brandClassId }}</td>
+          <td>{{ product.sizee }}</td>
+          <td>{{ product.regularSizeClassId }}</td>
+          <td>{{ product.languageClassId }}</td>
+          <td>{{ product.description }}</td>
+          <td>{{ product.keywords }}</td>
+          <td>
+            <a *ngIf="product.photo1" (click)="openFile(product.photo1, product.photo1ContentType)">
+              <img [src]="'data:' + product.photo1ContentType + ';base64,' + product.photo1" style="max-height: 30px" alt="product image" />
+            </a>
+            <span *ngIf="product.photo1">{{ product.photo1ContentType }}, {{ byteSize(product.photo1) }}</span>
+          </td>
+          <td>{{ product.count }}</td>
+          <td>{{ product.discount }}</td>
+          <td>{{ product.originalPrice }}</td>
+          <td>{{ product.finalPrice }}</td>
+          <td>{{ product.publishDate | formatMediumDate }}</td>
+          <td>{{ product.transportDate | formatMediumDate }}</td>
+          <td>{{ product.currencyClassId }}</td>
+          <td>{{ product.bonus }}</td>
+          <td>{{ product.warrantyClassId }}</td>
+          <td>{{ product.deliveryPlaceClassId }}</td>
+          <td>{{ product.paymentPlaceClassId }}</td>
+          <td jhiTranslate="{{ 'ecommercePortalApp.Performance.' + product.performance }}">{{ product.performance }}</td>
+          <td>{{ product.originalityClassId }}</td>
+          <td>{{ product.satisfaction }}</td>
+          <td>{{ product.used }}</td>
+          <td>
+            <div *ngIf="product.category">
+              <a [routerLink]="['/category', product.category.id, 'view']">{{ product.category.title }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="product.party">
+              <a [routerLink]="['/party', product.party.id, 'view']">{{ product.party.title }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="product.parent">
+              <a [routerLink]="['/product', product.parent.id, 'view']">{{ product.parent.name }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/product-item']"
+                [queryParams]="{ 'filter[productId.in]': product.id }"
+                class="btn btn-info btn-sm"
+                data-cy="filterOtherEntityButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span
+                  class="d-none d-md-inline"
+                  jhiTranslate="entity.action.show"
+                  [translateValues]="{ otherEntity: ('ecommercePortalApp.product.productItems' | translate) }"
+                  >Show Product Item</span
+                >
+              </button>
+              <button
+                type="submit"
+                [routerLink]="['/user-comment']"
+                [queryParams]="{ 'filter[productId.in]': product.id }"
+                class="btn btn-info btn-sm"
+                data-cy="filterOtherEntityButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span
+                  class="d-none d-md-inline"
+                  jhiTranslate="entity.action.show"
+                  [translateValues]="{ otherEntity: ('ecommercePortalApp.product.userComments' | translate) }"
+                  >Show User Comment</span
+                >
+              </button>
+              <button
+                type="submit"
+                [routerLink]="['/product']"
+                [queryParams]="{ 'filter[parentId.in]': product.id }"
+                class="btn btn-info btn-sm"
+                data-cy="filterOtherEntityButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span
+                  class="d-none d-md-inline"
+                  jhiTranslate="entity.action.show"
+                  [translateValues]="{ otherEntity: ('ecommercePortalApp.product.children' | translate) }"
+                  >Show Product</span
+                >
+              </button>
+              <button
+                type="submit"
+                [routerLink]="['/user-favorite']"
+                [queryParams]="{ 'filter[productId.in]': product.id }"
+                class="btn btn-info btn-sm"
+                data-cy="filterOtherEntityButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span
+                  class="d-none d-md-inline"
+                  jhiTranslate="entity.action.show"
+                  [translateValues]="{ otherEntity: ('ecommercePortalApp.product.favorites' | translate) }"
+                  >Show User Favorite</span
+                >
+              </button>
+              <button
+                type="submit"
+                [routerLink]="['/consume-material']"
+                [queryParams]="{ 'filter[productId.in]': product.id }"
+                class="btn btn-info btn-sm"
+                data-cy="filterOtherEntityButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span
+                  class="d-none d-md-inline"
+                  jhiTranslate="entity.action.show"
+                  [translateValues]="{ otherEntity: ('ecommercePortalApp.product.materials' | translate) }"
+                  >Show Consume Material</span
+                >
+              </button>
+              <button
+                type="submit"
+                [routerLink]="['/factor-item']"
+                [queryParams]="{ 'filter[productId.in]': product.id }"
+                class="btn btn-info btn-sm"
+                data-cy="filterOtherEntityButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span
+                  class="d-none d-md-inline"
+                  jhiTranslate="entity.action.show"
+                  [translateValues]="{ otherEntity: ('ecommercePortalApp.product.factorItems' | translate) }"
+                  >Show Factor Item</span
+                >
+              </button>
+              <button
+                type="submit"
+                [routerLink]="['/campaign']"
+                [queryParams]="{ 'filter[productsId.in]': product.id }"
+                class="btn btn-info btn-sm"
+                data-cy="filterOtherEntityButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span
+                  class="d-none d-md-inline"
+                  jhiTranslate="entity.action.show"
+                  [translateValues]="{ otherEntity: ('ecommercePortalApp.product.campaigns' | translate) }"
+                  >Show Campaign</span
+                >
+              </button>
+              <a [routerLink]="['/product', product.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </a>
+
+              <a [routerLink]="['/product', product.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </a>
+
+              <button type="submit" (click)="delete(product)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="products && products.length > 0">
+    <div class="d-flex justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [page]="page"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="navigateToPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

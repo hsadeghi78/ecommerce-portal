@@ -1,0 +1,87 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-resource-authority-heading"
+        data-cy="ResourceAuthorityCreateUpdateHeading"
+        jhiTranslate="ecommercePortalApp.resourceAuthority.home.createOrEditLabel"
+      >
+        Create or edit a Resource Authority
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="ecommercePortalApp.resourceAuthority.verb" for="field_verb">Verb</label>
+          <select class="form-control" name="verb" formControlName="verb" id="field_verb" data-cy="verb">
+            <option [ngValue]="null">{{ 'ecommercePortalApp.Verb.null' | translate }}</option>
+            <option *ngFor="let verb of verbValues" [value]="verb">{{ 'ecommercePortalApp.Verb.' + verb | translate }}</option>
+          </select>
+          <div *ngIf="editForm.get('verb')!.invalid && (editForm.get('verb')!.dirty || editForm.get('verb')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('verb')?.errors?.required" jhiTranslate="entity.validation.required"
+              >This field is required.</small
+            >
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="ecommercePortalApp.resourceAuthority.resource" for="field_resource">Resource</label>
+          <select
+            class="form-control"
+            id="field_resource"
+            data-cy="resource"
+            name="resource"
+            formControlName="resource"
+            [compareWith]="compareResource"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="resourceOption" *ngFor="let resourceOption of resourcesSharedCollection">
+              {{ resourceOption.displayName }}
+            </option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="ecommercePortalApp.resourceAuthority.myAuthority" for="field_myAuthority"
+            >My Authority</label
+          >
+          <select
+            class="form-control"
+            id="field_myAuthority"
+            data-cy="myAuthority"
+            name="myAuthority"
+            formControlName="myAuthority"
+            [compareWith]="compareMyAuthority"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="myAuthorityOption" *ngFor="let myAuthorityOption of myAuthoritiesSharedCollection">
+              {{ myAuthorityOption.displayName }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

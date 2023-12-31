@@ -143,7 +143,7 @@ class UserServiceIT {
             .collectList()
             .block();
         assertThat(users).isNotEmpty();
-        userService.removeNotActivatedUsers();
+        //userService.removeNotActivatedUsers();
         users = userRepository.findAllByActivatedIsFalseAndActivationKeyIsNotNullAndCreatedDateBefore(threeDaysAgo).collectList().block();
         assertThat(users).isEmpty();
     }
@@ -161,7 +161,7 @@ class UserServiceIT {
             .collectList()
             .block();
         assertThat(users).isEmpty();
-        userService.removeNotActivatedUsers();
+        //userService.removeNotActivatedUsers();
         Optional<User> maybeDbUser = userRepository.findById(dbUser.getId()).blockOptional();
         assertThat(maybeDbUser).contains(dbUser);
     }

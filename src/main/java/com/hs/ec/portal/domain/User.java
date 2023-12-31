@@ -79,6 +79,18 @@ public class User extends AbstractAuditingEntity<Long> implements Serializable {
     @Transient
     private Set<Authority> authorities = new HashSet<>();
 
+    /*@ManyToOne(optional = false)
+    @JoinColumn(name = "party_id")
+    @NotNull
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private Party party;*/
+
+    @Column("party_id")
+    private Long partyId;
+
+    @Transient
+    private Party party;
+
     public Long getId() {
         return id;
     }
@@ -182,6 +194,24 @@ public class User extends AbstractAuditingEntity<Long> implements Serializable {
 
     public void setAuthorities(Set<Authority> authorities) {
         this.authorities = authorities;
+    }
+
+    public Party getParty() {
+        return party;
+    }
+
+    public User setParty(Party party) {
+        this.party = party;
+        return this;
+    }
+
+    public Long getPartyId() {
+        return partyId;
+    }
+
+    public User setPartyId(Long partyId) {
+        this.partyId = partyId;
+        return this;
     }
 
     @Override

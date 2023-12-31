@@ -1,0 +1,29 @@
+{
+  "ecommercePortalApp": {
+    "geoDivision": {
+      "home": {
+        "title": "GeoDivisions",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Geo Division",
+        "createOrEditLabel": "Créer ou éditer un Geo Division",
+        "notFound": "Aucun Geo Division trouvé"
+      },
+      "created": "Un nouveau Geo Division a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Geo Division avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Geo Division avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Geo Division {{ id }} ?"
+      },
+      "detail": {
+        "title": "Geo Division"
+      },
+      "id": "ID",
+      "name": "Name",
+      "code": "Code",
+      "level": "Level",
+      "children": "Children",
+      "locations": "Locations",
+      "parent": "Parent"
+    }
+  }
+}

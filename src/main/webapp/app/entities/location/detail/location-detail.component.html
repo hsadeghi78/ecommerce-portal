@@ -1,0 +1,98 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="location">
+      <h2 data-cy="locationDetailsHeading"><span jhiTranslate="ecommercePortalApp.location.detail.title">Location</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ location.id }}</span>
+        </dd>
+        <dt>
+          <span
+            jhiTranslate="ecommercePortalApp.location.typeClassId"
+            [ngbTooltip]="'ecommercePortalApp.location.help.typeClassId' | translate"
+            >Type Class Id</span
+          >
+        </dt>
+        <dd>
+          <span>{{ location.typeClassId }}</span>
+        </dd>
+        <dt><span jhiTranslate="ecommercePortalApp.location.title">Title</span></dt>
+        <dd>
+          <span>{{ location.title }}</span>
+        </dd>
+        <dt><span jhiTranslate="ecommercePortalApp.location.lat">Lat</span></dt>
+        <dd>
+          <span>{{ location.lat }}</span>
+        </dd>
+        <dt><span jhiTranslate="ecommercePortalApp.location.lon">Lon</span></dt>
+        <dd>
+          <span>{{ location.lon }}</span>
+        </dd>
+        <dt><span jhiTranslate="ecommercePortalApp.location.street1">Street 1</span></dt>
+        <dd>
+          <span>{{ location.street1 }}</span>
+        </dd>
+        <dt><span jhiTranslate="ecommercePortalApp.location.street2">Street 2</span></dt>
+        <dd>
+          <span>{{ location.street2 }}</span>
+        </dd>
+        <dt><span jhiTranslate="ecommercePortalApp.location.street3">Street 3</span></dt>
+        <dd>
+          <span>{{ location.street3 }}</span>
+        </dd>
+        <dt><span jhiTranslate="ecommercePortalApp.location.buildingNo">Building No</span></dt>
+        <dd>
+          <span>{{ location.buildingNo }}</span>
+        </dd>
+        <dt><span jhiTranslate="ecommercePortalApp.location.buildingName">Building Name</span></dt>
+        <dd>
+          <span>{{ location.buildingName }}</span>
+        </dd>
+        <dt><span jhiTranslate="ecommercePortalApp.location.floor">Floor</span></dt>
+        <dd>
+          <span>{{ location.floor }}</span>
+        </dd>
+        <dt><span jhiTranslate="ecommercePortalApp.location.unit">Unit</span></dt>
+        <dd>
+          <span>{{ location.unit }}</span>
+        </dd>
+        <dt><span jhiTranslate="ecommercePortalApp.location.postalCode">Postal Code</span></dt>
+        <dd>
+          <span>{{ location.postalCode }}</span>
+        </dd>
+        <dt><span jhiTranslate="ecommercePortalApp.location.other">Other</span></dt>
+        <dd>
+          <span>{{ location.other }}</span>
+        </dd>
+        <dt><span jhiTranslate="ecommercePortalApp.location.geoDivision">Geo Division</span></dt>
+        <dd>
+          <div *ngIf="location.geoDivision">
+            <a [routerLink]="['/geo-division', location.geoDivision.id, 'view']">{{ location.geoDivision.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="ecommercePortalApp.location.party">Party</span></dt>
+        <dd>
+          <div *ngIf="location.party">
+            <a [routerLink]="['/party', location.party.id, 'view']">{{ location.party.title }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/location', location.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

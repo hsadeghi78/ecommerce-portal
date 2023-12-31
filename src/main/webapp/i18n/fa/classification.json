@@ -1,0 +1,31 @@
+{
+  "ecommercePortalApp": {
+    "classification": {
+      "home": {
+        "title": "Classifications",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Classification",
+        "createOrEditLabel": "Create or edit a Classification",
+        "notFound": "No Classifications found"
+      },
+      "created": "A new Classification is created with identifier {{ param }}",
+      "updated": "A Classification is updated with identifier {{ param }}",
+      "deleted": "A Classification is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Classification {{ id }}?"
+      },
+      "detail": {
+        "title": "Classification"
+      },
+      "id": "ID",
+      "title": "Title",
+      "classCode": "Class Code",
+      "description": "Description",
+      "languageClassId": "Language Class Id",
+      "classType": "Class Type",
+      "help": {
+        "languageClassId": "such as fa_IR, en_US, ar_AE, ar_SA and ....."
+      }
+    }
+  }
+}

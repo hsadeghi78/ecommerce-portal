@@ -1,0 +1,64 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="userComment">
+      <h2 data-cy="userCommentDetailsHeading"><span jhiTranslate="ecommercePortalApp.userComment.detail.title">User Comment</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ userComment.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="ecommercePortalApp.userComment.rating">Rating</span></dt>
+        <dd>
+          <span>{{ userComment.rating }}</span>
+        </dd>
+        <dt><span jhiTranslate="ecommercePortalApp.userComment.visible">Visible</span></dt>
+        <dd>
+          <span>{{ userComment.visible }}</span>
+        </dd>
+        <dt><span jhiTranslate="ecommercePortalApp.userComment.description">Description</span></dt>
+        <dd>
+          <span>{{ userComment.description }}</span>
+        </dd>
+        <dt><span jhiTranslate="ecommercePortalApp.userComment.party">Party</span></dt>
+        <dd>
+          <div *ngIf="userComment.party">
+            <a [routerLink]="['/party', userComment.party.id, 'view']">{{ userComment.party.title }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="ecommercePortalApp.userComment.product">Product</span></dt>
+        <dd>
+          <div *ngIf="userComment.product">
+            <a [routerLink]="['/product', userComment.product.id, 'view']">{{ userComment.product.name }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="ecommercePortalApp.userComment.factor">Factor</span></dt>
+        <dd>
+          <div *ngIf="userComment.factor">
+            <a [routerLink]="['/factor', userComment.factor.id, 'view']">{{ userComment.factor.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="ecommercePortalApp.userComment.parent">Parent</span></dt>
+        <dd>
+          <div *ngIf="userComment.parent">
+            <a [routerLink]="['/user-comment', userComment.parent.id, 'view']">{{ userComment.parent.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/user-comment', userComment.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

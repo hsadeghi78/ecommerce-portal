@@ -1,0 +1,69 @@
+{
+  "applications": "*",
+  "changelogDate": "20231228115110",
+  "documentation": "Comment for manage comment on paries and products\\n4 field fixed\\n@author Hossein Sadeghi (hsadeghi78@gmail.com)",
+  "dto": "mapstruct",
+  "entityTableName": "user_comment",
+  "fields": [
+    {
+      "fieldName": "rating",
+      "fieldType": "Float",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "visible",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "2000"
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "name": "UserComment",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "userComment",
+      "otherEntityRelationshipName": "parent",
+      "relationshipName": "children",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityField": "title",
+      "otherEntityName": "party",
+      "otherEntityRelationshipName": "userComments",
+      "relationshipName": "party",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "product",
+      "otherEntityRelationshipName": "userComments",
+      "relationshipName": "product",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "factor",
+      "otherEntityRelationshipName": "userComments",
+      "relationshipName": "factor",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "userComment",
+      "otherEntityRelationshipName": "children",
+      "relationshipName": "parent",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

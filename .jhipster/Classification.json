@@ -1,0 +1,49 @@
+{
+  "applications": "*",
+  "changelogDate": "20231228114710",
+  "documentation": "Classification for Constants\\n@author Hossein Sadeghi (hsadeghi78@gmail.com)",
+  "dto": "mapstruct",
+  "entityTableName": "classification",
+  "fields": [
+    {
+      "fieldName": "title",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "200"
+    },
+    {
+      "fieldName": "classCode",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "25"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "300"
+    },
+    {
+      "documentation": "such as fa_IR, en_US, ar_AE, ar_SA and .....",
+      "fieldName": "languageClassId",
+      "fieldType": "Long",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "name": "Classification",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityField": "title",
+      "otherEntityName": "classType",
+      "otherEntityRelationshipName": "classifications",
+      "relationshipName": "classType",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

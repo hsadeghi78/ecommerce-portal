@@ -1,0 +1,26 @@
+{
+  "ecommercePortalApp": {
+    "resourceAuthority": {
+      "home": {
+        "title": "ResourceAuthorities",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Resource Authority",
+        "createOrEditLabel": "Créer ou éditer un Resource Authority",
+        "notFound": "Aucun Resource Authority trouvé"
+      },
+      "created": "Un nouveau Resource Authority a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Resource Authority avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Resource Authority avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Resource Authority {{ id }} ?"
+      },
+      "detail": {
+        "title": "Resource Authority"
+      },
+      "id": "ID",
+      "verb": "Verb",
+      "resource": "Resource",
+      "myAuthority": "My Authority"
+    }
+  }
+}

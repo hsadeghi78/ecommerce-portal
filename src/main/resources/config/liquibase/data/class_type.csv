@@ -1,0 +1,18 @@
+id;title;type_code;description
+1;language;1;null
+2;Location Type;2;null
+3;Contact Type;3;null
+4;Brand;4;null
+5;Regular Size;5;null
+6;Material Type;6;null
+7;Currency;7;null
+8;warranty;8;null
+9;deliveryPlace;9;null
+10;paymentPlace;10;null
+11;originality;11;null
+12;Product Item Type;12;null
+13;activationStatus;13;null
+14;Factor Status;14;null
+15;Factor PaymentState;15;null
+16;Transaction Type;16;null
+17;Product Type;17;null

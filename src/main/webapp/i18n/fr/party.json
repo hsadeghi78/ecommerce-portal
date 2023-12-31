@@ -1,0 +1,42 @@
+{
+  "ecommercePortalApp": {
+    "party": {
+      "home": {
+        "title": "Parties",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Party",
+        "createOrEditLabel": "Créer ou éditer un Party",
+        "notFound": "Aucun Party trouvé"
+      },
+      "created": "Un nouveau Party a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Party avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Party avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Party {{ id }} ?"
+      },
+      "detail": {
+        "title": "Party"
+      },
+      "id": "ID",
+      "title": "Title",
+      "partyCode": "Party Code",
+      "tradeTitle": "Trade Title",
+      "activationDate": "Activation Date",
+      "expirationDate": "Expiration Date",
+      "activationStatus": "Activation Status",
+      "photo": "Photo",
+      "personType": "Person Type",
+      "buyerFactors": "Buyer Factors",
+      "sellerFactors": "Seller Factors",
+      "userComments": "User Comments",
+      "products": "Products",
+      "providerAgreements": "Provider Agreements",
+      "consumerAgreements": "Consumer Agreements",
+      "contacts": "Contacts",
+      "locations": "Locations",
+      "help": {
+        "personType": "PersonType : TRUE&gt;REAL_PERSON, FALSE&gt;LEGAL_PERSON"
+      }
+    }
+  }
+}

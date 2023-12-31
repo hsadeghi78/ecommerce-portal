@@ -1,0 +1,50 @@
+{
+  "applications": "*",
+  "changelogDate": "20231228120510",
+  "documentation": "@author Hossein Sadeghi (hsadeghi78@gmail.com)",
+  "dto": "mapstruct",
+  "entityTableName": "my_authority",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength", "unique"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "displayName",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "100"
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "name": "MyAuthority",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "myAuthority",
+      "otherEntityRelationshipName": "parent",
+      "relationshipName": "children",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "resourceAuthority",
+      "otherEntityRelationshipName": "myAuthority",
+      "relationshipName": "resourceAuthorities",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "myAuthority",
+      "otherEntityRelationshipName": "children",
+      "relationshipName": "parent",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

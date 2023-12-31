@@ -1,0 +1,40 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="classType">
+      <h2 data-cy="classTypeDetailsHeading"><span jhiTranslate="ecommercePortalApp.classType.detail.title">Class Type</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ classType.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="ecommercePortalApp.classType.title">Title</span></dt>
+        <dd>
+          <span>{{ classType.title }}</span>
+        </dd>
+        <dt><span jhiTranslate="ecommercePortalApp.classType.typeCode">Type Code</span></dt>
+        <dd>
+          <span>{{ classType.typeCode }}</span>
+        </dd>
+        <dt><span jhiTranslate="ecommercePortalApp.classType.description">Description</span></dt>
+        <dd>
+          <span>{{ classType.description }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/class-type', classType.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

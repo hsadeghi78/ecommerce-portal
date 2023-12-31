@@ -1,0 +1,102 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="factor">
+      <h2 data-cy="factorDetailsHeading"><span jhiTranslate="ecommercePortalApp.factor.detail.title">Factor</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ factor.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="ecommercePortalApp.factor.title">Title</span></dt>
+        <dd>
+          <span>{{ factor.title }}</span>
+        </dd>
+        <dt><span jhiTranslate="ecommercePortalApp.factor.factorCode">Factor Code</span></dt>
+        <dd>
+          <span>{{ factor.factorCode }}</span>
+        </dd>
+        <dt>
+          <span
+            jhiTranslate="ecommercePortalApp.factor.lastStatusClassId"
+            [ngbTooltip]="'ecommercePortalApp.factor.help.lastStatusClassId' | translate"
+            >Last Status Class Id</span
+          >
+        </dt>
+        <dd>
+          <span>{{ factor.lastStatusClassId }}</span>
+        </dd>
+        <dt>
+          <span
+            jhiTranslate="ecommercePortalApp.factor.paymentStateClassId"
+            [ngbTooltip]="'ecommercePortalApp.factor.help.paymentStateClassId' | translate"
+            >Payment State Class Id</span
+          >
+        </dt>
+        <dd>
+          <span>{{ factor.paymentStateClassId }}</span>
+        </dd>
+        <dt><span jhiTranslate="ecommercePortalApp.factor.categoryClassId">Category Class Id</span></dt>
+        <dd>
+          <span>{{ factor.categoryClassId }}</span>
+        </dd>
+        <dt><span jhiTranslate="ecommercePortalApp.factor.totalPrice">Total Price</span></dt>
+        <dd>
+          <span>{{ factor.totalPrice }}</span>
+        </dd>
+        <dt><span jhiTranslate="ecommercePortalApp.factor.discount">Discount</span></dt>
+        <dd>
+          <span>{{ factor.discount }}</span>
+        </dd>
+        <dt><span jhiTranslate="ecommercePortalApp.factor.discountCode">Discount Code</span></dt>
+        <dd>
+          <span>{{ factor.discountCode }}</span>
+        </dd>
+        <dt><span jhiTranslate="ecommercePortalApp.factor.finalTax">Final Tax</span></dt>
+        <dd>
+          <span>{{ factor.finalTax }}</span>
+        </dd>
+        <dt><span jhiTranslate="ecommercePortalApp.factor.payable">Payable</span></dt>
+        <dd>
+          <span>{{ factor.payable }}</span>
+        </dd>
+        <dt><span jhiTranslate="ecommercePortalApp.factor.description">Description</span></dt>
+        <dd>
+          <span>{{ factor.description }}</span>
+        </dd>
+        <dt><span jhiTranslate="ecommercePortalApp.factor.location">Location</span></dt>
+        <dd>
+          <div *ngIf="factor.location">
+            <a [routerLink]="['/location', factor.location.id, 'view']">{{ factor.location.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="ecommercePortalApp.factor.buyerParty">Buyer Party</span></dt>
+        <dd>
+          <div *ngIf="factor.buyerParty">
+            <a [routerLink]="['/party', factor.buyerParty.id, 'view']">{{ factor.buyerParty.title }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="ecommercePortalApp.factor.sellerParty">Seller Party</span></dt>
+        <dd>
+          <div *ngIf="factor.sellerParty">
+            <a [routerLink]="['/party', factor.sellerParty.id, 'view']">{{ factor.sellerParty.title }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/factor', factor.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

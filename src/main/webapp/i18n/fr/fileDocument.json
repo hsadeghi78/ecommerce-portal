@@ -1,0 +1,28 @@
+{
+  "ecommercePortalApp": {
+    "fileDocument": {
+      "home": {
+        "title": "FileDocuments",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau File Document",
+        "createOrEditLabel": "Créer ou éditer un File Document",
+        "notFound": "Aucun File Document trouvé"
+      },
+      "created": "Un nouveau File Document a été créé avec l'identifiant {{ param }}",
+      "updated": "Le File Document avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le File Document avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le File Document {{ id }} ?"
+      },
+      "detail": {
+        "title": "File Document"
+      },
+      "id": "ID",
+      "fileName": "File Name",
+      "fileContent": "File Content",
+      "filePath": "File Path",
+      "description": "Description",
+      "prices": "Prices"
+    }
+  }
+}

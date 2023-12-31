@@ -1,0 +1,648 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-product-heading" data-cy="ProductCreateUpdateHeading" jhiTranslate="ecommercePortalApp.product.home.createOrEditLabel">
+        Create or edit a Product
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="ecommercePortalApp.product.name" for="field_name">Name</label>
+          <input type="text" class="form-control" name="name" id="field_name" data-cy="name" formControlName="name" />
+          <div *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('name')?.errors?.required" jhiTranslate="entity.validation.required"
+              >This field is required.</small
+            >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('name')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 500 }"
+              >This field cannot be longer than 500 characters.</small
+            >
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label
+            class="form-label"
+            jhiTranslate="ecommercePortalApp.product.typeClassId"
+            for="field_typeClassId"
+            [ngbTooltip]="'ecommercePortalApp.product.help.typeClassId' | translate"
+            >Type Class Id</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="typeClassId"
+            id="field_typeClassId"
+            data-cy="typeClassId"
+            formControlName="typeClassId"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label
+            class="form-label"
+            jhiTranslate="ecommercePortalApp.product.brandClassId"
+            for="field_brandClassId"
+            [ngbTooltip]="'ecommercePortalApp.product.help.brandClassId' | translate"
+            >Brand Class Id</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="brandClassId"
+            id="field_brandClassId"
+            data-cy="brandClassId"
+            formControlName="brandClassId"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label
+            class="form-label"
+            jhiTranslate="ecommercePortalApp.product.sizee"
+            for="field_sizee"
+            [ngbTooltip]="'ecommercePortalApp.product.help.sizee' | translate"
+            >Sizee</label
+          >
+          <input type="text" class="form-control" name="sizee" id="field_sizee" data-cy="sizee" formControlName="sizee" />
+          <div *ngIf="editForm.get('sizee')!.invalid && (editForm.get('sizee')!.dirty || editForm.get('sizee')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('sizee')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 100 }"
+              >This field cannot be longer than 100 characters.</small
+            >
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label
+            class="form-label"
+            jhiTranslate="ecommercePortalApp.product.regularSizeClassId"
+            for="field_regularSizeClassId"
+            [ngbTooltip]="'ecommercePortalApp.product.help.regularSizeClassId' | translate"
+            >Regular Size Class Id</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="regularSizeClassId"
+            id="field_regularSizeClassId"
+            data-cy="regularSizeClassId"
+            formControlName="regularSizeClassId"
+          />
+          <div
+            *ngIf="
+              editForm.get('regularSizeClassId')!.invalid &&
+              (editForm.get('regularSizeClassId')!.dirty || editForm.get('regularSizeClassId')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('regularSizeClassId')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+              >This field is required.</small
+            >
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('regularSizeClassId')?.errors?.number"
+              jhiTranslate="entity.validation.number"
+              >This field should be a number.</small
+            >
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label
+            class="form-label"
+            jhiTranslate="ecommercePortalApp.product.languageClassId"
+            for="field_languageClassId"
+            [ngbTooltip]="'ecommercePortalApp.product.help.languageClassId' | translate"
+            >Language Class Id</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="languageClassId"
+            id="field_languageClassId"
+            data-cy="languageClassId"
+            formControlName="languageClassId"
+          />
+          <div
+            *ngIf="
+              editForm.get('languageClassId')!.invalid &&
+              (editForm.get('languageClassId')!.dirty || editForm.get('languageClassId')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('languageClassId')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+              >This field is required.</small
+            >
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('languageClassId')?.errors?.number"
+              jhiTranslate="entity.validation.number"
+              >This field should be a number.</small
+            >
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="ecommercePortalApp.product.description" for="field_description">Description</label>
+          <input
+            type="text"
+            class="form-control"
+            name="description"
+            id="field_description"
+            data-cy="description"
+            formControlName="description"
+          />
+          <div *ngIf="editForm.get('description')!.invalid && (editForm.get('description')!.dirty || editForm.get('description')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('description')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 2500 }"
+              >This field cannot be longer than 2500 characters.</small
+            >
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label
+            class="form-label"
+            jhiTranslate="ecommercePortalApp.product.keywords"
+            for="field_keywords"
+            [ngbTooltip]="'ecommercePortalApp.product.help.keywords' | translate"
+            >Keywords</label
+          >
+          <input type="text" class="form-control" name="keywords" id="field_keywords" data-cy="keywords" formControlName="keywords" />
+          <div *ngIf="editForm.get('keywords')!.invalid && (editForm.get('keywords')!.dirty || editForm.get('keywords')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('keywords')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 500 }"
+              >This field cannot be longer than 500 characters.</small
+            >
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="ecommercePortalApp.product.photo1" for="field_photo1">Photo 1</label>
+          <div>
+            <img
+              [src]="'data:' + editForm.get('photo1ContentType')!.value + ';base64,' + editForm.get('photo1')!.value"
+              style="max-height: 100px"
+              *ngIf="editForm.get('photo1')!.value"
+              alt="product image"
+            />
+            <div *ngIf="editForm.get('photo1')!.value" class="form-text text-danger clearfix">
+              <span class="pull-start">{{ editForm.get('photo1ContentType')!.value }}, {{ byteSize(editForm.get('photo1')!.value!) }}</span>
+              <button
+                type="button"
+                (click)="clearInputImage('photo1', 'photo1ContentType', 'file_photo1')"
+                class="btn btn-secondary btn-xs pull-end"
+              >
+                <fa-icon icon="times"></fa-icon>
+              </button>
+            </div>
+            <input
+              type="file"
+              id="file_photo1"
+              data-cy="photo1"
+              (change)="setFileData($event, 'photo1', true)"
+              accept="image/*"
+              jhiTranslate="entity.action.addimage"
+            />
+          </div>
+          <input type="hidden" class="form-control" name="photo1" id="field_photo1" data-cy="photo1" formControlName="photo1" />
+          <input
+            type="hidden"
+            class="form-control"
+            name="photo1ContentType"
+            id="field_photo1ContentType"
+            formControlName="photo1ContentType"
+          />
+          <div *ngIf="editForm.get('photo1')!.invalid && (editForm.get('photo1')!.dirty || editForm.get('photo1')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('photo1')?.errors?.required" jhiTranslate="entity.validation.required"
+              >This field is required.</small
+            >
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label
+            class="form-label"
+            jhiTranslate="ecommercePortalApp.product.count"
+            for="field_count"
+            [ngbTooltip]="'ecommercePortalApp.product.help.count' | translate"
+            >Count</label
+          >
+          <input type="number" class="form-control" name="count" id="field_count" data-cy="count" formControlName="count" />
+          <div *ngIf="editForm.get('count')!.invalid && (editForm.get('count')!.dirty || editForm.get('count')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('count')?.errors?.required" jhiTranslate="entity.validation.required"
+              >This field is required.</small
+            >
+            <small class="form-text text-danger" [hidden]="!editForm.get('count')?.errors?.number" jhiTranslate="entity.validation.number"
+              >This field should be a number.</small
+            >
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="ecommercePortalApp.product.discount" for="field_discount">Discount</label>
+          <input type="number" class="form-control" name="discount" id="field_discount" data-cy="discount" formControlName="discount" />
+        </div>
+
+        <div class="mb-3">
+          <label
+            class="form-label"
+            jhiTranslate="ecommercePortalApp.product.originalPrice"
+            for="field_originalPrice"
+            [ngbTooltip]="'ecommercePortalApp.product.help.originalPrice' | translate"
+            >Original Price</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="originalPrice"
+            id="field_originalPrice"
+            data-cy="originalPrice"
+            formControlName="originalPrice"
+          />
+          <div
+            *ngIf="
+              editForm.get('originalPrice')!.invalid && (editForm.get('originalPrice')!.dirty || editForm.get('originalPrice')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('originalPrice')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+              >This field is required.</small
+            >
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('originalPrice')?.errors?.number"
+              jhiTranslate="entity.validation.number"
+              >This field should be a number.</small
+            >
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label
+            class="form-label"
+            jhiTranslate="ecommercePortalApp.product.finalPrice"
+            for="field_finalPrice"
+            [ngbTooltip]="'ecommercePortalApp.product.help.finalPrice' | translate"
+            >Final Price</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="finalPrice"
+            id="field_finalPrice"
+            data-cy="finalPrice"
+            formControlName="finalPrice"
+          />
+          <div *ngIf="editForm.get('finalPrice')!.invalid && (editForm.get('finalPrice')!.dirty || editForm.get('finalPrice')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('finalPrice')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+              >This field is required.</small
+            >
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('finalPrice')?.errors?.number"
+              jhiTranslate="entity.validation.number"
+              >This field should be a number.</small
+            >
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="ecommercePortalApp.product.publishDate" for="field_publishDate">Publish Date</label>
+          <div class="input-group">
+            <input
+              id="field_publishDate"
+              data-cy="publishDate"
+              type="text"
+              class="form-control"
+              name="publishDate"
+              ngbDatepicker
+              #publishDateDp="ngbDatepicker"
+              formControlName="publishDate"
+            />
+            <button type="button" class="btn btn-secondary" (click)="publishDateDp.toggle()">
+              <fa-icon icon="calendar-alt"></fa-icon>
+            </button>
+          </div>
+          <div *ngIf="editForm.get('publishDate')!.invalid && (editForm.get('publishDate')!.dirty || editForm.get('publishDate')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('publishDate')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+              >This field is required.</small
+            >
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label
+            class="form-label"
+            jhiTranslate="ecommercePortalApp.product.transportDate"
+            for="field_transportDate"
+            [ngbTooltip]="'ecommercePortalApp.product.help.transportDate' | translate"
+            >Transport Date</label
+          >
+          <div class="input-group">
+            <input
+              id="field_transportDate"
+              data-cy="transportDate"
+              type="text"
+              class="form-control"
+              name="transportDate"
+              ngbDatepicker
+              #transportDateDp="ngbDatepicker"
+              formControlName="transportDate"
+            />
+            <button type="button" class="btn btn-secondary" (click)="transportDateDp.toggle()">
+              <fa-icon icon="calendar-alt"></fa-icon>
+            </button>
+          </div>
+          <div
+            *ngIf="
+              editForm.get('transportDate')!.invalid && (editForm.get('transportDate')!.dirty || editForm.get('transportDate')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('transportDate')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+              >This field is required.</small
+            >
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label
+            class="form-label"
+            jhiTranslate="ecommercePortalApp.product.currencyClassId"
+            for="field_currencyClassId"
+            [ngbTooltip]="'ecommercePortalApp.product.help.currencyClassId' | translate"
+            >Currency Class Id</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="currencyClassId"
+            id="field_currencyClassId"
+            data-cy="currencyClassId"
+            formControlName="currencyClassId"
+          />
+          <div
+            *ngIf="
+              editForm.get('currencyClassId')!.invalid &&
+              (editForm.get('currencyClassId')!.dirty || editForm.get('currencyClassId')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('currencyClassId')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+              >This field is required.</small
+            >
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('currencyClassId')?.errors?.number"
+              jhiTranslate="entity.validation.number"
+              >This field should be a number.</small
+            >
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="ecommercePortalApp.product.bonus" for="field_bonus">Bonus</label>
+          <input type="number" class="form-control" name="bonus" id="field_bonus" data-cy="bonus" formControlName="bonus" />
+        </div>
+
+        <div class="mb-3">
+          <label
+            class="form-label"
+            jhiTranslate="ecommercePortalApp.product.warrantyClassId"
+            for="field_warrantyClassId"
+            [ngbTooltip]="'ecommercePortalApp.product.help.warrantyClassId' | translate"
+            >Warranty Class Id</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="warrantyClassId"
+            id="field_warrantyClassId"
+            data-cy="warrantyClassId"
+            formControlName="warrantyClassId"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label
+            class="form-label"
+            jhiTranslate="ecommercePortalApp.product.deliveryPlaceClassId"
+            for="field_deliveryPlaceClassId"
+            [ngbTooltip]="'ecommercePortalApp.product.help.deliveryPlaceClassId' | translate"
+            >Delivery Place Class Id</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="deliveryPlaceClassId"
+            id="field_deliveryPlaceClassId"
+            data-cy="deliveryPlaceClassId"
+            formControlName="deliveryPlaceClassId"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label
+            class="form-label"
+            jhiTranslate="ecommercePortalApp.product.paymentPlaceClassId"
+            for="field_paymentPlaceClassId"
+            [ngbTooltip]="'ecommercePortalApp.product.help.paymentPlaceClassId' | translate"
+            >Payment Place Class Id</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="paymentPlaceClassId"
+            id="field_paymentPlaceClassId"
+            data-cy="paymentPlaceClassId"
+            formControlName="paymentPlaceClassId"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label
+            class="form-label"
+            jhiTranslate="ecommercePortalApp.product.performance"
+            for="field_performance"
+            [ngbTooltip]="'ecommercePortalApp.product.help.performance' | translate"
+            >Performance</label
+          >
+          <select class="form-control" name="performance" formControlName="performance" id="field_performance" data-cy="performance">
+            <option [ngValue]="null">{{ 'ecommercePortalApp.Performance.null' | translate }}</option>
+            <option *ngFor="let performance of performanceValues" [value]="performance">
+              {{ 'ecommercePortalApp.Performance.' + performance | translate }}
+            </option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label
+            class="form-label"
+            jhiTranslate="ecommercePortalApp.product.originalityClassId"
+            for="field_originalityClassId"
+            [ngbTooltip]="'ecommercePortalApp.product.help.originalityClassId' | translate"
+            >Originality Class Id</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="originalityClassId"
+            id="field_originalityClassId"
+            data-cy="originalityClassId"
+            formControlName="originalityClassId"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label
+            class="form-label"
+            jhiTranslate="ecommercePortalApp.product.satisfaction"
+            for="field_satisfaction"
+            [ngbTooltip]="'ecommercePortalApp.product.help.satisfaction' | translate"
+            >Satisfaction</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="satisfaction"
+            id="field_satisfaction"
+            data-cy="satisfaction"
+            formControlName="satisfaction"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label
+            class="form-label"
+            jhiTranslate="ecommercePortalApp.product.used"
+            for="field_used"
+            [ngbTooltip]="'ecommercePortalApp.product.help.used' | translate"
+            >Used</label
+          >
+          <input type="checkbox" class="form-check" name="used" id="field_used" data-cy="used" formControlName="used" />
+          <div *ngIf="editForm.get('used')!.invalid && (editForm.get('used')!.dirty || editForm.get('used')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('used')?.errors?.required" jhiTranslate="entity.validation.required"
+              >This field is required.</small
+            >
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label jhiTranslate="ecommercePortalApp.product.documents" for="field_documents">Documents</label>
+          <select
+            class="form-control"
+            id="field_documents"
+            data-cy="documents"
+            multiple
+            name="documents"
+            formControlName="documents"
+            [compareWith]="compareFileDocument"
+          >
+            <option [ngValue]="fileDocumentOption" *ngFor="let fileDocumentOption of fileDocumentsSharedCollection">
+              {{ fileDocumentOption.id }}
+            </option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="ecommercePortalApp.product.category" for="field_category">Category</label>
+          <select
+            class="form-control"
+            id="field_category"
+            data-cy="category"
+            name="category"
+            formControlName="category"
+            [compareWith]="compareCategory"
+          >
+            <option *ngIf="editForm.get(['category'])!.value == null" [ngValue]="null" selected></option>
+            <option [ngValue]="categoryOption" *ngFor="let categoryOption of categoriesSharedCollection">{{ categoryOption.title }}</option>
+          </select>
+        </div>
+        <div *ngIf="editForm.get(['category'])!.invalid && (editForm.get(['category'])!.dirty || editForm.get(['category'])!.touched)">
+          <small
+            class="form-text text-danger"
+            *ngIf="editForm.get(['category'])?.errors?.required"
+            jhiTranslate="entity.validation.required"
+            >This field is required.</small
+          >
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="ecommercePortalApp.product.party" for="field_party">Party</label>
+          <select class="form-control" id="field_party" data-cy="party" name="party" formControlName="party" [compareWith]="compareParty">
+            <option [ngValue]="null"></option>
+            <option [ngValue]="partyOption" *ngFor="let partyOption of partiesSharedCollection">{{ partyOption.title }}</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="ecommercePortalApp.product.parent" for="field_parent">Parent</label>
+          <select
+            class="form-control"
+            id="field_parent"
+            data-cy="parent"
+            name="parent"
+            formControlName="parent"
+            [compareWith]="compareProduct"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="productOption" *ngFor="let productOption of productsSharedCollection">{{ productOption.name }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

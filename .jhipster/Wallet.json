@@ -1,0 +1,39 @@
+{
+  "applications": "*",
+  "changelogDate": "20231228121010",
+  "documentation": "4 field fixed\\n@author Hossein Sadeghi (hsadeghi78@gmail.com)",
+  "dto": "mapstruct",
+  "entityTableName": "wallet",
+  "fields": [
+    {
+      "documentation": "TransactionTypeClass for ONLINE_RECHARGE, FACTOR_SETTLEMENT, SUBSCRIPTION_FEE",
+      "fieldName": "transTypeClassId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "stock",
+      "fieldType": "Double",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "1000"
+    },
+    {
+      "fieldName": "deposit",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "withdrawal",
+      "fieldType": "Double"
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "name": "Wallet",
+  "pagination": "pagination",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

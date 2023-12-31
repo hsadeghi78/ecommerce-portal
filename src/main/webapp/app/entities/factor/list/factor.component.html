@@ -1,0 +1,231 @@
+<div>
+  <h2 id="page-heading" data-cy="FactorHeading">
+    <span jhiTranslate="ecommercePortalApp.factor.home.title">Factors</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="ecommercePortalApp.factor.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-factor"
+        [routerLink]="['/factor/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="ecommercePortalApp.factor.home.createLabel">Create a new Factor</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <jhi-filter [filters]="filters"></jhi-filter>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="factors?.length === 0">
+    <span jhiTranslate="ecommercePortalApp.factor.home.notFound">No Factors found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="factors && factors.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span jhiTranslate="global.field.id">ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="title">
+            <div class="d-flex">
+              <span jhiTranslate="ecommercePortalApp.factor.title">Title</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="factorCode">
+            <div class="d-flex">
+              <span jhiTranslate="ecommercePortalApp.factor.factorCode">Factor Code</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="lastStatusClassId">
+            <div class="d-flex">
+              <span jhiTranslate="ecommercePortalApp.factor.lastStatusClassId">Last Status Class Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="paymentStateClassId">
+            <div class="d-flex">
+              <span jhiTranslate="ecommercePortalApp.factor.paymentStateClassId">Payment State Class Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="categoryClassId">
+            <div class="d-flex">
+              <span jhiTranslate="ecommercePortalApp.factor.categoryClassId">Category Class Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="totalPrice">
+            <div class="d-flex">
+              <span jhiTranslate="ecommercePortalApp.factor.totalPrice">Total Price</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="discount">
+            <div class="d-flex">
+              <span jhiTranslate="ecommercePortalApp.factor.discount">Discount</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="discountCode">
+            <div class="d-flex">
+              <span jhiTranslate="ecommercePortalApp.factor.discountCode">Discount Code</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="finalTax">
+            <div class="d-flex">
+              <span jhiTranslate="ecommercePortalApp.factor.finalTax">Final Tax</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="payable">
+            <div class="d-flex">
+              <span jhiTranslate="ecommercePortalApp.factor.payable">Payable</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="description">
+            <div class="d-flex">
+              <span jhiTranslate="ecommercePortalApp.factor.description">Description</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="location.id">
+            <div class="d-flex">
+              <span jhiTranslate="ecommercePortalApp.factor.location">Location</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="buyerParty.title">
+            <div class="d-flex">
+              <span jhiTranslate="ecommercePortalApp.factor.buyerParty">Buyer Party</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="sellerParty.title">
+            <div class="d-flex">
+              <span jhiTranslate="ecommercePortalApp.factor.sellerParty">Seller Party</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let factor of factors; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/factor', factor.id, 'view']">{{ factor.id }}</a>
+          </td>
+          <td>{{ factor.title }}</td>
+          <td>{{ factor.factorCode }}</td>
+          <td>{{ factor.lastStatusClassId }}</td>
+          <td>{{ factor.paymentStateClassId }}</td>
+          <td>{{ factor.categoryClassId }}</td>
+          <td>{{ factor.totalPrice }}</td>
+          <td>{{ factor.discount }}</td>
+          <td>{{ factor.discountCode }}</td>
+          <td>{{ factor.finalTax }}</td>
+          <td>{{ factor.payable }}</td>
+          <td>{{ factor.description }}</td>
+          <td>
+            <div *ngIf="factor.location">
+              <a [routerLink]="['/location', factor.location.id, 'view']">{{ factor.location.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="factor.buyerParty">
+              <a [routerLink]="['/party', factor.buyerParty.id, 'view']">{{ factor.buyerParty.title }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="factor.sellerParty">
+              <a [routerLink]="['/party', factor.sellerParty.id, 'view']">{{ factor.sellerParty.title }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/factor-item']"
+                [queryParams]="{ 'filter[factorId.in]': factor.id }"
+                class="btn btn-info btn-sm"
+                data-cy="filterOtherEntityButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span
+                  class="d-none d-md-inline"
+                  jhiTranslate="entity.action.show"
+                  [translateValues]="{ otherEntity: ('ecommercePortalApp.factor.factorItems' | translate) }"
+                  >Show Factor Item</span
+                >
+              </button>
+              <button
+                type="submit"
+                [routerLink]="['/user-comment']"
+                [queryParams]="{ 'filter[factorId.in]': factor.id }"
+                class="btn btn-info btn-sm"
+                data-cy="filterOtherEntityButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span
+                  class="d-none d-md-inline"
+                  jhiTranslate="entity.action.show"
+                  [translateValues]="{ otherEntity: ('ecommercePortalApp.factor.userComments' | translate) }"
+                  >Show User Comment</span
+                >
+              </button>
+              <a [routerLink]="['/factor', factor.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </a>
+
+              <a [routerLink]="['/factor', factor.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </a>
+
+              <button type="submit" (click)="delete(factor)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="factors && factors.length > 0">
+    <div class="d-flex justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [page]="page"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="navigateToPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

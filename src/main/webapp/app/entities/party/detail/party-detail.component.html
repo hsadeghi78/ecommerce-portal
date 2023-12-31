@@ -1,0 +1,69 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="party">
+      <h2 data-cy="partyDetailsHeading"><span jhiTranslate="ecommercePortalApp.party.detail.title">Party</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ party.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="ecommercePortalApp.party.title">Title</span></dt>
+        <dd>
+          <span>{{ party.title }}</span>
+        </dd>
+        <dt><span jhiTranslate="ecommercePortalApp.party.partyCode">Party Code</span></dt>
+        <dd>
+          <span>{{ party.partyCode }}</span>
+        </dd>
+        <dt><span jhiTranslate="ecommercePortalApp.party.tradeTitle">Trade Title</span></dt>
+        <dd>
+          <span>{{ party.tradeTitle }}</span>
+        </dd>
+        <dt><span jhiTranslate="ecommercePortalApp.party.activationDate">Activation Date</span></dt>
+        <dd>
+          <span>{{ party.activationDate | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="ecommercePortalApp.party.expirationDate">Expiration Date</span></dt>
+        <dd>
+          <span>{{ party.expirationDate | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="ecommercePortalApp.party.activationStatus">Activation Status</span></dt>
+        <dd>
+          <span>{{ party.activationStatus }}</span>
+        </dd>
+        <dt><span jhiTranslate="ecommercePortalApp.party.photo">Photo</span></dt>
+        <dd>
+          <div *ngIf="party.photo">
+            <a (click)="openFile(party.photo, party.photoContentType)">
+              <img [src]="'data:' + party.photoContentType + ';base64,' + party.photo" style="max-width: 100%" alt="party image" />
+            </a>
+            {{ party.photoContentType }}, {{ byteSize(party.photo) }}
+          </div>
+        </dd>
+        <dt>
+          <span jhiTranslate="ecommercePortalApp.party.personType" [ngbTooltip]="'ecommercePortalApp.party.help.personType' | translate"
+            >Person Type</span
+          >
+        </dt>
+        <dd>
+          <span>{{ party.personType }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/party', party.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

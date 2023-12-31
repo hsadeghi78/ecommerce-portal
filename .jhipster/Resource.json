@@ -1,0 +1,47 @@
+{
+  "applications": "*",
+  "changelogDate": "20231228120610",
+  "documentation": "4 field fixed\\n@author Hossein Sadeghi (hsadeghi78@gmail.com)",
+  "dto": "mapstruct",
+  "entityTableName": "resource",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "displayName",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "300"
+    },
+    {
+      "fieldName": "apiUri",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "1000"
+    },
+    {
+      "fieldName": "resourceType",
+      "fieldType": "ResourceType",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "DOMAIN,COMPONENT,PAGE_URL"
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "name": "Resource",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "resourceAuthority",
+      "otherEntityRelationshipName": "resource",
+      "relationshipName": "resourceAuthorities",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

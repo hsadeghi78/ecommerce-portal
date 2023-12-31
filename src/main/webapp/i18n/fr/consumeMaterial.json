@@ -1,0 +1,30 @@
+{
+  "ecommercePortalApp": {
+    "consumeMaterial": {
+      "home": {
+        "title": "ConsumeMaterials",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Consume Material",
+        "createOrEditLabel": "Créer ou éditer un Consume Material",
+        "notFound": "Aucun Consume Material trouvé"
+      },
+      "created": "Un nouveau Consume Material a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Consume Material avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Consume Material avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Consume Material {{ id }} ?"
+      },
+      "detail": {
+        "title": "Consume Material"
+      },
+      "id": "ID",
+      "typeClassId": "Type Class Id",
+      "name": "Name",
+      "value": "Value",
+      "product": "Product",
+      "help": {
+        "typeClassId": "typeClass, NATURAL_COLOR, VEGETABLES, DAIRY and ..... (Base On business maybe change)"
+      }
+    }
+  }
+}

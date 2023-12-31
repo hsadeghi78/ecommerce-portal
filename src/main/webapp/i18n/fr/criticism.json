@@ -1,0 +1,27 @@
+{
+  "ecommercePortalApp": {
+    "criticism": {
+      "home": {
+        "title": "Criticisms",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Criticism",
+        "createOrEditLabel": "Créer ou éditer un Criticism",
+        "notFound": "Aucun Criticism trouvé"
+      },
+      "created": "Un nouveau Criticism a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Criticism avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Criticism avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Criticism {{ id }} ?"
+      },
+      "detail": {
+        "title": "Criticism"
+      },
+      "id": "ID",
+      "fullName": "Full Name",
+      "email": "Email",
+      "contactNumber": "Contact Number",
+      "description": "Description"
+    }
+  }
+}

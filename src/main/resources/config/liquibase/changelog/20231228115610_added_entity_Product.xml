@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <!--
+        Added the entity Product.
+    -->
+    <changeSet id="20231228115610-1" author="jhipster">
+        <createTable tableName="product" remarks="4 field fixed and Party, prices, items\n@author Hossein Sadeghi (hsadeghi78@gmail.com)">
+            <column name="id" type="bigint" autoIncrement="true" startWith="1500">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(500)">
+                <constraints nullable="false" />
+            </column>
+            <column name="type_class_id" type="bigint" remarks="Type is optional for some of kinds of product">
+                <constraints nullable="true" />
+            </column>
+            <column name="brand_class_id" type="bigint" remarks="brand of product such as SAMSUNG, APPLE, DELL, ....">
+                <constraints nullable="true" />
+            </column>
+            <column name="sizee" type="varchar(100)" remarks="bitwiz of sizes: 34,35,36,40,......">
+                <constraints nullable="true" />
+            </column>
+            <column name="regular_size_class_id" type="bigint" remarks="XSMALL, SMALL, MEDIUM, LARG, XLARG, XXLARG, XXXLARG, FREE">
+                <constraints nullable="false" />
+            </column>
+            <column name="language_class_id" type="bigint" remarks="such as fa_IR, en_US, ar_AE, ar_SA and .....">
+                <constraints nullable="false" />
+            </column>
+            <column name="description" type="varchar(2500)">
+                <constraints nullable="true" />
+            </column>
+            <column name="keywords" type="varchar(500)" remarks="Comma Seprated keywords for search and tags">
+                <constraints nullable="true" />
+            </column>
+            <column name="photo_1" type="${blobType}">
+                <constraints nullable="false" />
+            </column>
+            <column name="photo_1_content_type" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="count" type="double" remarks="Product Count as per Party">
+                <constraints nullable="false" />
+            </column>
+            <column name="discount" type="${floatType}">
+                <constraints nullable="true" />
+            </column>
+            <column name="original_price" type="double" remarks="original price is before discount">
+                <constraints nullable="false" />
+            </column>
+            <column name="final_price" type="double" remarks="producer price is after discount">
+                <constraints nullable="false" />
+            </column>
+            <column name="publish_date" type="date">
+                <constraints nullable="false" />
+            </column>
+            <column name="transport_date" type="date" remarks="first time for deliver or send product">
+                <constraints nullable="false" />
+            </column>
+            <column name="currency_class_id" type="bigint" remarks="such as IRR,IRT, AED,USD and .....">
+                <constraints nullable="false" />
+            </column>
+            <column name="bonus" type="${floatType}">
+                <constraints nullable="true" />
+            </column>
+            <column name="warranty_class_id" type="bigint" remarks="warrantyClass, ORIGINALITY, KARABI_KALA, BATRY, DURATION(1Year,2year)">
+                <constraints nullable="true" />
+            </column>
+            <column name="delivery_place_class_id" type="bigint" remarks="deliveryPlaceClass, ON_SITE, IN_STORE,CUSTOMER_ADDRESS">
+                <constraints nullable="true" />
+            </column>
+            <column name="payment_place_class_id" type="bigint" remarks="paymentPlaceClass, ONLINE,CREDIT_CARD, CASH_ON_DELIVERY, WALLET">
+                <constraints nullable="true" />
+            </column>
+            <column name="performance" type="varchar(255)" remarks="keyfiyate va karaee mahsol">
+                <constraints nullable="true" />
+            </column>
+            <column name="originality_class_id" type="bigint" remarks="originalityClass, ORIGINAL, HIGH_COPY,FAKE">
+                <constraints nullable="true" />
+            </column>
+            <column name="satisfaction" type="${floatType}" remarks="mizane rezayat">
+                <constraints nullable="true" />
+            </column>
+            <column name="used" type="boolean" remarks="new or used product">
+                <constraints nullable="false" />
+            </column>
+            <column name="category_id" type="bigint">
+                <constraints nullable="false" />
+            </column>
+            <column name="party_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="parent_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="created_by" type="varchar(50)"/>
+            <column name="created_date" type="timestamp"/>
+            <column name="last_modified_by" type="varchar(50)"/>
+            <column name="last_modified_date" type="timestamp"/>
+            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
+        </createTable>
+    </changeSet>
+
+    <changeSet id="20231228115610-1-relations" author="jhipster">
+
+        <createTable tableName="rel_product__documents">
+            <column name="documents_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="product_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="product_id, documents_id" tableName="rel_product__documents"/>
+    </changeSet>
+
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
+
+    <!--
+        Load sample data generated with Faker.js
+        - This data can be easily edited using a CSV editor (or even MS Excel) and
+          is located in the 'src/main/resources/config/liquibase/fake-data' directory
+        - By default this data is applied when running with the JHipster 'dev' profile.
+          This can be customized by adding or removing 'faker' in the 'spring.liquibase.contexts'
+          Spring Boot configuration key.
+    -->
+    <changeSet id="20231228115610-1-data" author="jhipster" context="faker">
+        <loadData
+                  file="config/liquibase/fake-data/product.csv"
+                  separator=";"
+                  tableName="product"
+                  usePreparedStatements="true">
+            <column name="id" type="numeric"/>
+            <column name="name" type="string"/>
+            <column name="type_class_id" type="numeric"/>
+            <column name="brand_class_id" type="numeric"/>
+            <column name="sizee" type="string"/>
+            <column name="regular_size_class_id" type="numeric"/>
+            <column name="language_class_id" type="numeric"/>
+            <column name="description" type="string"/>
+            <column name="keywords" type="string"/>
+            <column name="photo_1" type="blob"/>
+            <column name="photo_1_content_type" type="string"/>
+            <column name="count" type="numeric"/>
+            <column name="discount" type="numeric"/>
+            <column name="original_price" type="numeric"/>
+            <column name="final_price" type="numeric"/>
+            <column name="publish_date" type="date"/>
+            <column name="transport_date" type="date"/>
+            <column name="currency_class_id" type="numeric"/>
+            <column name="bonus" type="numeric"/>
+            <column name="warranty_class_id" type="numeric"/>
+            <column name="delivery_place_class_id" type="numeric"/>
+            <column name="payment_place_class_id" type="numeric"/>
+            <column name="performance" type="string"/>
+            <column name="originality_class_id" type="numeric"/>
+            <column name="satisfaction" type="numeric"/>
+            <column name="used" type="boolean"/>
+            <column name="category_id" type="numeric"/>
+            <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
+        </loadData>
+    </changeSet>
+</databaseChangeLog>

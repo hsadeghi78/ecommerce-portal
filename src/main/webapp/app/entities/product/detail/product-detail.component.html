@@ -1,0 +1,250 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="product">
+      <h2 data-cy="productDetailsHeading"><span jhiTranslate="ecommercePortalApp.product.detail.title">Product</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ product.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="ecommercePortalApp.product.name">Name</span></dt>
+        <dd>
+          <span>{{ product.name }}</span>
+        </dd>
+        <dt>
+          <span
+            jhiTranslate="ecommercePortalApp.product.typeClassId"
+            [ngbTooltip]="'ecommercePortalApp.product.help.typeClassId' | translate"
+            >Type Class Id</span
+          >
+        </dt>
+        <dd>
+          <span>{{ product.typeClassId }}</span>
+        </dd>
+        <dt>
+          <span
+            jhiTranslate="ecommercePortalApp.product.brandClassId"
+            [ngbTooltip]="'ecommercePortalApp.product.help.brandClassId' | translate"
+            >Brand Class Id</span
+          >
+        </dt>
+        <dd>
+          <span>{{ product.brandClassId }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="ecommercePortalApp.product.sizee" [ngbTooltip]="'ecommercePortalApp.product.help.sizee' | translate"
+            >Sizee</span
+          >
+        </dt>
+        <dd>
+          <span>{{ product.sizee }}</span>
+        </dd>
+        <dt>
+          <span
+            jhiTranslate="ecommercePortalApp.product.regularSizeClassId"
+            [ngbTooltip]="'ecommercePortalApp.product.help.regularSizeClassId' | translate"
+            >Regular Size Class Id</span
+          >
+        </dt>
+        <dd>
+          <span>{{ product.regularSizeClassId }}</span>
+        </dd>
+        <dt>
+          <span
+            jhiTranslate="ecommercePortalApp.product.languageClassId"
+            [ngbTooltip]="'ecommercePortalApp.product.help.languageClassId' | translate"
+            >Language Class Id</span
+          >
+        </dt>
+        <dd>
+          <span>{{ product.languageClassId }}</span>
+        </dd>
+        <dt><span jhiTranslate="ecommercePortalApp.product.description">Description</span></dt>
+        <dd>
+          <span>{{ product.description }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="ecommercePortalApp.product.keywords" [ngbTooltip]="'ecommercePortalApp.product.help.keywords' | translate"
+            >Keywords</span
+          >
+        </dt>
+        <dd>
+          <span>{{ product.keywords }}</span>
+        </dd>
+        <dt><span jhiTranslate="ecommercePortalApp.product.photo1">Photo 1</span></dt>
+        <dd>
+          <div *ngIf="product.photo1">
+            <a (click)="openFile(product.photo1, product.photo1ContentType)">
+              <img [src]="'data:' + product.photo1ContentType + ';base64,' + product.photo1" style="max-width: 100%" alt="product image" />
+            </a>
+            {{ product.photo1ContentType }}, {{ byteSize(product.photo1) }}
+          </div>
+        </dd>
+        <dt>
+          <span jhiTranslate="ecommercePortalApp.product.count" [ngbTooltip]="'ecommercePortalApp.product.help.count' | translate"
+            >Count</span
+          >
+        </dt>
+        <dd>
+          <span>{{ product.count }}</span>
+        </dd>
+        <dt><span jhiTranslate="ecommercePortalApp.product.discount">Discount</span></dt>
+        <dd>
+          <span>{{ product.discount }}</span>
+        </dd>
+        <dt>
+          <span
+            jhiTranslate="ecommercePortalApp.product.originalPrice"
+            [ngbTooltip]="'ecommercePortalApp.product.help.originalPrice' | translate"
+            >Original Price</span
+          >
+        </dt>
+        <dd>
+          <span>{{ product.originalPrice }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="ecommercePortalApp.product.finalPrice" [ngbTooltip]="'ecommercePortalApp.product.help.finalPrice' | translate"
+            >Final Price</span
+          >
+        </dt>
+        <dd>
+          <span>{{ product.finalPrice }}</span>
+        </dd>
+        <dt><span jhiTranslate="ecommercePortalApp.product.publishDate">Publish Date</span></dt>
+        <dd>
+          <span>{{ product.publishDate | formatMediumDate }}</span>
+        </dd>
+        <dt>
+          <span
+            jhiTranslate="ecommercePortalApp.product.transportDate"
+            [ngbTooltip]="'ecommercePortalApp.product.help.transportDate' | translate"
+            >Transport Date</span
+          >
+        </dt>
+        <dd>
+          <span>{{ product.transportDate | formatMediumDate }}</span>
+        </dd>
+        <dt>
+          <span
+            jhiTranslate="ecommercePortalApp.product.currencyClassId"
+            [ngbTooltip]="'ecommercePortalApp.product.help.currencyClassId' | translate"
+            >Currency Class Id</span
+          >
+        </dt>
+        <dd>
+          <span>{{ product.currencyClassId }}</span>
+        </dd>
+        <dt><span jhiTranslate="ecommercePortalApp.product.bonus">Bonus</span></dt>
+        <dd>
+          <span>{{ product.bonus }}</span>
+        </dd>
+        <dt>
+          <span
+            jhiTranslate="ecommercePortalApp.product.warrantyClassId"
+            [ngbTooltip]="'ecommercePortalApp.product.help.warrantyClassId' | translate"
+            >Warranty Class Id</span
+          >
+        </dt>
+        <dd>
+          <span>{{ product.warrantyClassId }}</span>
+        </dd>
+        <dt>
+          <span
+            jhiTranslate="ecommercePortalApp.product.deliveryPlaceClassId"
+            [ngbTooltip]="'ecommercePortalApp.product.help.deliveryPlaceClassId' | translate"
+            >Delivery Place Class Id</span
+          >
+        </dt>
+        <dd>
+          <span>{{ product.deliveryPlaceClassId }}</span>
+        </dd>
+        <dt>
+          <span
+            jhiTranslate="ecommercePortalApp.product.paymentPlaceClassId"
+            [ngbTooltip]="'ecommercePortalApp.product.help.paymentPlaceClassId' | translate"
+            >Payment Place Class Id</span
+          >
+        </dt>
+        <dd>
+          <span>{{ product.paymentPlaceClassId }}</span>
+        </dd>
+        <dt>
+          <span
+            jhiTranslate="ecommercePortalApp.product.performance"
+            [ngbTooltip]="'ecommercePortalApp.product.help.performance' | translate"
+            >Performance</span
+          >
+        </dt>
+        <dd>
+          <span jhiTranslate="{{ 'ecommercePortalApp.Performance.' + product.performance }}">{{ product.performance }}</span>
+        </dd>
+        <dt>
+          <span
+            jhiTranslate="ecommercePortalApp.product.originalityClassId"
+            [ngbTooltip]="'ecommercePortalApp.product.help.originalityClassId' | translate"
+            >Originality Class Id</span
+          >
+        </dt>
+        <dd>
+          <span>{{ product.originalityClassId }}</span>
+        </dd>
+        <dt>
+          <span
+            jhiTranslate="ecommercePortalApp.product.satisfaction"
+            [ngbTooltip]="'ecommercePortalApp.product.help.satisfaction' | translate"
+            >Satisfaction</span
+          >
+        </dt>
+        <dd>
+          <span>{{ product.satisfaction }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="ecommercePortalApp.product.used" [ngbTooltip]="'ecommercePortalApp.product.help.used' | translate">Used</span>
+        </dt>
+        <dd>
+          <span>{{ product.used }}</span>
+        </dd>
+        <dt><span jhiTranslate="ecommercePortalApp.product.documents">Documents</span></dt>
+        <dd>
+          <span *ngFor="let documents of product.documents; let last = last">
+            <a [routerLink]="['/file-document', documents.id, 'view']">{{ documents.id }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+        <dt><span jhiTranslate="ecommercePortalApp.product.category">Category</span></dt>
+        <dd>
+          <div *ngIf="product.category">
+            <a [routerLink]="['/category', product.category.id, 'view']">{{ product.category.title }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="ecommercePortalApp.product.party">Party</span></dt>
+        <dd>
+          <div *ngIf="product.party">
+            <a [routerLink]="['/party', product.party.id, 'view']">{{ product.party.title }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="ecommercePortalApp.product.parent">Parent</span></dt>
+        <dd>
+          <div *ngIf="product.parent">
+            <a [routerLink]="['/product', product.parent.id, 'view']">{{ product.parent.name }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/product', product.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,31 @@
+{
+  "ecommercePortalApp": {
+    "factorItem": {
+      "home": {
+        "title": "Factor Items",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Factor Item",
+        "createOrEditLabel": "Create or edit a Factor Item",
+        "notFound": "No Factor Items found"
+      },
+      "created": "A new Factor Item is created with identifier {{ param }}",
+      "updated": "A Factor Item is updated with identifier {{ param }}",
+      "deleted": "A Factor Item is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Factor Item {{ id }}?"
+      },
+      "detail": {
+        "title": "Factor Item"
+      },
+      "id": "ID",
+      "rowNum": "Row Num",
+      "title": "Title",
+      "count": "Count",
+      "discount": "Discount",
+      "tax": "Tax",
+      "description": "Description",
+      "factor": "Factor",
+      "product": "Product"
+    }
+  }
+}

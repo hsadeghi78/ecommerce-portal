@@ -1,0 +1,28 @@
+{
+  "ecommercePortalApp": {
+    "fileDocument": {
+      "home": {
+        "title": "File Documents",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new File Document",
+        "createOrEditLabel": "Create or edit a File Document",
+        "notFound": "No File Documents found"
+      },
+      "created": "A new File Document is created with identifier {{ param }}",
+      "updated": "A File Document is updated with identifier {{ param }}",
+      "deleted": "A File Document is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete File Document {{ id }}?"
+      },
+      "detail": {
+        "title": "File Document"
+      },
+      "id": "ID",
+      "fileName": "File Name",
+      "fileContent": "File Content",
+      "filePath": "File Path",
+      "description": "Description",
+      "prices": "Prices"
+    }
+  }
+}

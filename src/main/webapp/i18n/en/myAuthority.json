@@ -1,0 +1,28 @@
+{
+  "ecommercePortalApp": {
+    "myAuthority": {
+      "home": {
+        "title": "My Authorities",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new My Authority",
+        "createOrEditLabel": "Create or edit a My Authority",
+        "notFound": "No My Authorities found"
+      },
+      "created": "A new My Authority is created with identifier {{ param }}",
+      "updated": "A My Authority is updated with identifier {{ param }}",
+      "deleted": "A My Authority is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete My Authority {{ id }}?"
+      },
+      "detail": {
+        "title": "My Authority"
+      },
+      "id": "ID",
+      "name": "Name",
+      "displayName": "Display Name",
+      "children": "Children",
+      "resourceAuthorities": "Resource Authorities",
+      "parent": "Parent"
+    }
+  }
+}

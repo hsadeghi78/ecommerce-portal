@@ -1,0 +1,38 @@
+{
+  "applications": "*",
+  "changelogDate": "20231228120710",
+  "documentation": "@author Hossein Sadeghi (hsadeghi78@gmail.com)",
+  "dto": "mapstruct",
+  "entityTableName": "resource_authority",
+  "fields": [
+    {
+      "fieldName": "verb",
+      "fieldType": "Verb",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "NO_GRANT,VIEW,CREATE,EDIT,DELETE"
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "name": "ResourceAuthority",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityField": "displayName",
+      "otherEntityName": "resource",
+      "otherEntityRelationshipName": "resourceAuthorities",
+      "relationshipName": "resource",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "displayName",
+      "otherEntityName": "myAuthority",
+      "otherEntityRelationshipName": "resourceAuthorities",
+      "relationshipName": "myAuthority",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

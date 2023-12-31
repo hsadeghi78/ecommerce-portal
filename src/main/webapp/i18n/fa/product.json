@@ -1,0 +1,78 @@
+{
+  "ecommercePortalApp": {
+    "product": {
+      "home": {
+        "title": "Products",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Product",
+        "createOrEditLabel": "Create or edit a Product",
+        "notFound": "No Products found"
+      },
+      "created": "A new Product is created with identifier {{ param }}",
+      "updated": "A Product is updated with identifier {{ param }}",
+      "deleted": "A Product is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Product {{ id }}?"
+      },
+      "detail": {
+        "title": "Product"
+      },
+      "id": "ID",
+      "name": "Name",
+      "typeClassId": "Type Class Id",
+      "brandClassId": "Brand Class Id",
+      "sizee": "Sizee",
+      "regularSizeClassId": "Regular Size Class Id",
+      "languageClassId": "Language Class Id",
+      "description": "Description",
+      "keywords": "Keywords",
+      "photo1": "Photo 1",
+      "count": "Count",
+      "discount": "Discount",
+      "originalPrice": "Original Price",
+      "finalPrice": "Final Price",
+      "publishDate": "Publish Date",
+      "transportDate": "Transport Date",
+      "currencyClassId": "Currency Class Id",
+      "bonus": "Bonus",
+      "warrantyClassId": "Warranty Class Id",
+      "deliveryPlaceClassId": "Delivery Place Class Id",
+      "paymentPlaceClassId": "Payment Place Class Id",
+      "performance": "Performance",
+      "originalityClassId": "Originality Class Id",
+      "satisfaction": "Satisfaction",
+      "used": "Used",
+      "productItems": "Product Items",
+      "userComments": "User Comments",
+      "children": "Children",
+      "favorites": "Favorites",
+      "materials": "Materials",
+      "factorItems": "Factor Items",
+      "documents": "Documents",
+      "category": "Category",
+      "party": "Party",
+      "parent": "Parent",
+      "campaigns": "Campaigns",
+      "help": {
+        "typeClassId": "Type is optional for some of kinds of product",
+        "brandClassId": "brand of product such as SAMSUNG, APPLE, DELL, ....",
+        "sizee": "bitwiz of sizes: 34,35,36,40,......",
+        "regularSizeClassId": "XSMALL, SMALL, MEDIUM, LARG, XLARG, XXLARG, XXXLARG, FREE",
+        "languageClassId": "such as fa_IR, en_US, ar_AE, ar_SA and .....",
+        "keywords": "Comma Seprated keywords for search and tags",
+        "count": "Product Count as per Party",
+        "originalPrice": "original price is before discount",
+        "finalPrice": "producer price is after discount",
+        "transportDate": "first time for deliver or send product",
+        "currencyClassId": "such as IRR,IRT, AED,USD and .....",
+        "warrantyClassId": "warrantyClass, ORIGINALITY, KARABI_KALA, BATRY, DURATION(1Year,2year)",
+        "deliveryPlaceClassId": "deliveryPlaceClass, ON_SITE, IN_STORE,CUSTOMER_ADDRESS",
+        "paymentPlaceClassId": "paymentPlaceClass, ONLINE,CREDIT_CARD, CASH_ON_DELIVERY, WALLET",
+        "performance": "keyfiyate va karaee mahsol",
+        "originalityClassId": "originalityClass, ORIGINAL, HIGH_COPY,FAKE",
+        "satisfaction": "mizane rezayat",
+        "used": "new or used product"
+      }
+    }
+  }
+}

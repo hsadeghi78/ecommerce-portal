@@ -1,0 +1,30 @@
+{
+  "ecommercePortalApp": {
+    "productItem": {
+      "home": {
+        "title": "ProductItems",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Product Item",
+        "createOrEditLabel": "Créer ou éditer un Product Item",
+        "notFound": "Aucun Product Item trouvé"
+      },
+      "created": "Un nouveau Product Item a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Product Item avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Product Item avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Product Item {{ id }} ?"
+      },
+      "detail": {
+        "title": "Product Item"
+      },
+      "id": "ID",
+      "typeClassId": "Type Class Id",
+      "name": "Name",
+      "value": "Value",
+      "product": "Product",
+      "help": {
+        "typeClassId": "typeClass, HEADER, BASE, TECHNICAL, DESIGN, MEMORY, CPU and ..... (Base On business maybe change)"
+      }
+    }
+  }
+}

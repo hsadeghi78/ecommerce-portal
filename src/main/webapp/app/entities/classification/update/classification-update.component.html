@@ -1,0 +1,158 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-classification-heading"
+        data-cy="ClassificationCreateUpdateHeading"
+        jhiTranslate="ecommercePortalApp.classification.home.createOrEditLabel"
+      >
+        Create or edit a Classification
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="ecommercePortalApp.classification.title" for="field_title">Title</label>
+          <input type="text" class="form-control" name="title" id="field_title" data-cy="title" formControlName="title" />
+          <div *ngIf="editForm.get('title')!.invalid && (editForm.get('title')!.dirty || editForm.get('title')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('title')?.errors?.required" jhiTranslate="entity.validation.required"
+              >This field is required.</small
+            >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('title')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 200 }"
+              >This field cannot be longer than 200 characters.</small
+            >
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="ecommercePortalApp.classification.classCode" for="field_classCode">Class Code</label>
+          <input type="text" class="form-control" name="classCode" id="field_classCode" data-cy="classCode" formControlName="classCode" />
+          <div *ngIf="editForm.get('classCode')!.invalid && (editForm.get('classCode')!.dirty || editForm.get('classCode')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('classCode')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+              >This field is required.</small
+            >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('classCode')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 25 }"
+              >This field cannot be longer than 25 characters.</small
+            >
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="ecommercePortalApp.classification.description" for="field_description">Description</label>
+          <input
+            type="text"
+            class="form-control"
+            name="description"
+            id="field_description"
+            data-cy="description"
+            formControlName="description"
+          />
+          <div *ngIf="editForm.get('description')!.invalid && (editForm.get('description')!.dirty || editForm.get('description')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('description')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 300 }"
+              >This field cannot be longer than 300 characters.</small
+            >
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label
+            class="form-label"
+            jhiTranslate="ecommercePortalApp.classification.languageClassId"
+            for="field_languageClassId"
+            [ngbTooltip]="'ecommercePortalApp.classification.help.languageClassId' | translate"
+            >Language Class Id</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="languageClassId"
+            id="field_languageClassId"
+            data-cy="languageClassId"
+            formControlName="languageClassId"
+          />
+          <div
+            *ngIf="
+              editForm.get('languageClassId')!.invalid &&
+              (editForm.get('languageClassId')!.dirty || editForm.get('languageClassId')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('languageClassId')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+              >This field is required.</small
+            >
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('languageClassId')?.errors?.number"
+              jhiTranslate="entity.validation.number"
+              >This field should be a number.</small
+            >
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="ecommercePortalApp.classification.classType" for="field_classType">Class Type</label>
+          <select
+            class="form-control"
+            id="field_classType"
+            data-cy="classType"
+            name="classType"
+            formControlName="classType"
+            [compareWith]="compareClassType"
+          >
+            <option *ngIf="editForm.get(['classType'])!.value == null" [ngValue]="null" selected></option>
+            <option [ngValue]="classTypeOption" *ngFor="let classTypeOption of classTypesSharedCollection">
+              {{ classTypeOption.title }}
+            </option>
+          </select>
+        </div>
+        <div *ngIf="editForm.get(['classType'])!.invalid && (editForm.get(['classType'])!.dirty || editForm.get(['classType'])!.touched)">
+          <small
+            class="form-text text-danger"
+            *ngIf="editForm.get(['classType'])?.errors?.required"
+            jhiTranslate="entity.validation.required"
+            >This field is required.</small
+          >
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

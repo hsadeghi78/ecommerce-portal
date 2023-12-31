@@ -1,0 +1,52 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="productItem">
+      <h2 data-cy="productItemDetailsHeading"><span jhiTranslate="ecommercePortalApp.productItem.detail.title">Product Item</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ productItem.id }}</span>
+        </dd>
+        <dt>
+          <span
+            jhiTranslate="ecommercePortalApp.productItem.typeClassId"
+            [ngbTooltip]="'ecommercePortalApp.productItem.help.typeClassId' | translate"
+            >Type Class Id</span
+          >
+        </dt>
+        <dd>
+          <span>{{ productItem.typeClassId }}</span>
+        </dd>
+        <dt><span jhiTranslate="ecommercePortalApp.productItem.name">Name</span></dt>
+        <dd>
+          <span>{{ productItem.name }}</span>
+        </dd>
+        <dt><span jhiTranslate="ecommercePortalApp.productItem.value">Value</span></dt>
+        <dd>
+          <span>{{ productItem.value }}</span>
+        </dd>
+        <dt><span jhiTranslate="ecommercePortalApp.productItem.product">Product</span></dt>
+        <dd>
+          <div *ngIf="productItem.product">
+            <a [routerLink]="['/product', productItem.product.id, 'view']">{{ productItem.product.name }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/product-item', productItem.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

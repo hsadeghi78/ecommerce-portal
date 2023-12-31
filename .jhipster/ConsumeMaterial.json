@@ -1,0 +1,43 @@
+{
+  "applications": "*",
+  "changelogDate": "20231228115710",
+  "documentation": "Json Of material, fields is dynamic",
+  "dto": "mapstruct",
+  "entityTableName": "consume_material",
+  "fields": [
+    {
+      "documentation": "typeClass, NATURAL_COLOR, VEGETABLES, DAIRY and ..... (Base On business maybe change)",
+      "fieldName": "typeClassId",
+      "fieldType": "Long",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength", "required"],
+      "fieldValidateRulesMaxlength": "100"
+    },
+    {
+      "fieldName": "value",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength", "required"],
+      "fieldValidateRulesMaxlength": "800"
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "name": "ConsumeMaterial",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "product",
+      "otherEntityRelationshipName": "materials",
+      "relationshipName": "product",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

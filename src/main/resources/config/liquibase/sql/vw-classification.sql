@@ -1,0 +1,1 @@
+CREATE OR REPLACE VIEW VW_CLASSIFICATION AS select c.id, c.title, c.class_code, c.description, c.language_class_id, t.id as type_id, t.type_code,t.title as type_title, t.description as type_desc from classification c, class_type t where c.class_type_id = t.id;

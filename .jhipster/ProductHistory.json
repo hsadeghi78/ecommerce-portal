@@ -1,0 +1,176 @@
+{
+  "applications": "*",
+  "changelogDate": "20231228115910",
+  "documentation": "4 field fixed\\n@author Hossein Sadeghi (hsadeghi78@gmail.com)\\nafter per update on Product on object add to tfhis table. be handling in DFenging and view for this object Only for admin",
+  "dto": "mapstruct",
+  "entityTableName": "price_history",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "500"
+    },
+    {
+      "documentation": "Type is optional for some of kinds of product",
+      "fieldName": "typeClassId",
+      "fieldType": "Long"
+    },
+    {
+      "documentation": "brand of product such as SAMSUNG, APPLE, DELL, ....",
+      "fieldName": "brandClassId",
+      "fieldType": "Long"
+    },
+    {
+      "documentation": "bitwiz of sizes: 34,35,36,40,......",
+      "fieldName": "sizee",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "100"
+    },
+    {
+      "documentation": "XSMALL, SMALL, MEDIUM, LARG, XLARG, XXLARG, XXXLARG, FREE",
+      "fieldName": "regularSizeClassId",
+      "fieldType": "Long",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "documentation": "such as fa_IR, en_US, ar_AE, ar_SA and .....",
+      "fieldName": "languageClassId",
+      "fieldType": "Long",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "2500"
+    },
+    {
+      "documentation": "Comma Seprated keywords for search and tags",
+      "fieldName": "keywords",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "500"
+    },
+    {
+      "fieldName": "photo1",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "image",
+      "fieldValidateRules": ["required", "maxbytes"],
+      "fieldValidateRulesMaxbytes": "307200"
+    },
+    {
+      "documentation": "Product Count as per Party",
+      "fieldName": "count",
+      "fieldType": "Double",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "discount",
+      "fieldType": "Float"
+    },
+    {
+      "documentation": "original price is before discount",
+      "fieldName": "originalPrice",
+      "fieldType": "Double",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "documentation": "producer price is after discount",
+      "fieldName": "finalPrice",
+      "fieldType": "Double",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "publishDate",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "documentation": "first time for deliver or send product",
+      "fieldName": "transportDate",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "documentation": "such as IRR,IRT, AED,USD and .....",
+      "fieldName": "currencyClassId",
+      "fieldType": "Long",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "bonus",
+      "fieldType": "Float"
+    },
+    {
+      "documentation": "warrantyClass, ORIGINALITY, KARABI_KALA, BATRY, DURATION(1Year,2year)",
+      "fieldName": "warrantyClassId",
+      "fieldType": "Long"
+    },
+    {
+      "documentation": "deliveryPlaceClass, ON_SITE, IN_STORE,CUSTOMER_ADDRESS",
+      "fieldName": "deliveryPlaceClassId",
+      "fieldType": "Long"
+    },
+    {
+      "documentation": "paymentPlaceClass, ONLINE,CREDIT_CARD, CASH_ON_DELIVERY, WALLET",
+      "fieldName": "paymentPlaceClassId",
+      "fieldType": "Long"
+    },
+    {
+      "documentation": "keyfiyate va karaee mahsol",
+      "fieldName": "performance",
+      "fieldType": "Performance",
+      "fieldTypeDocumentation": "application {\\nconfig {\\nbaseName onlineStore,\\napplicationType monolith,\\npackageName com.hs.ecommerce,\\nauthenticationType jwt,\\nprodDatabaseType mysql,\\nclientFramework angular\\n}\\nentities *\\n}",
+      "fieldValues": "VERY_WEAK,WEAK,MIDDLE,WELL,PERFECT,EXCELLENT"
+    },
+    {
+      "documentation": "originalityClass, ORIGINAL, HIGH_COPY,FAKE",
+      "fieldName": "originalityClassId",
+      "fieldType": "Long"
+    },
+    {
+      "documentation": "mizane rezayat",
+      "fieldName": "satisfaction",
+      "fieldType": "Float"
+    },
+    {
+      "documentation": "new or used product",
+      "fieldName": "used",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "categoryId",
+      "fieldType": "Long",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "partyId",
+      "fieldType": "Long",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "productId",
+      "fieldType": "Long",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "priceId",
+      "fieldType": "Long",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "campaignId",
+      "fieldType": "Long"
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "name": "ProductHistory",
+  "pagination": "pagination",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceClass",
+  "skipClient": true
+}

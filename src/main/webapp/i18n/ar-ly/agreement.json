@@ -1,0 +1,34 @@
+{
+  "ecommercePortalApp": {
+    "agreement": {
+      "home": {
+        "title": "Agreements",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Agreement",
+        "createOrEditLabel": "Create or edit a Agreement",
+        "notFound": "No Agreements found"
+      },
+      "created": "A new Agreement is created with identifier {{ param }}",
+      "updated": "A Agreement is updated with identifier {{ param }}",
+      "deleted": "A Agreement is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Agreement {{ id }}?"
+      },
+      "detail": {
+        "title": "Agreement"
+      },
+      "id": "ID",
+      "name": "Name",
+      "startDate": "Start Date",
+      "endDate": "End Date",
+      "activationStatusClassId": "Activation Status Class Id",
+      "infrastructureBenefit": "Infrastructure Benefit",
+      "extraBenefit": "Extra Benefit",
+      "provider": "Provider",
+      "consumer": "Consumer",
+      "help": {
+        "activationStatusClassId": "activationStatusClass PRE_REGISTER,SUSPEND,FINAL,ACTIVE,EXPIRE"
+      }
+    }
+  }
+}

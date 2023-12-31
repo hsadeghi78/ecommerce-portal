@@ -184,10 +184,10 @@ entity Product(PRODUCT) {
     description String maxlength(2500),
     keywords String maxlength(500),
     photo1 ImageBlob required maxbytes(307200)
-    
-    
-    
-    
+
+
+
+
     /** Product Count as per Party */
     count Double required,
     discount Float,
@@ -261,8 +261,8 @@ entity ProductHistory(PRICE_HISTORY) {
     description String maxlength(2500),
     keywords String maxlength(500),
     photo1 ImageBlob required maxbytes(307200)
-         
-    
+
+
     /** Product Count as per Party */
     count Double required,
     discount Float,
@@ -473,5 +473,5 @@ paginate * with pagination
 dto * with mapstruct
 // Set service options to all except few
 service all with serviceClass
-skipClient PriceHistory,VwClassification
+skipClient ProductHistory,VwClassification
 filter all

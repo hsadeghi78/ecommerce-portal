@@ -1,0 +1,46 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="geoDivision">
+      <h2 data-cy="geoDivisionDetailsHeading"><span jhiTranslate="ecommercePortalApp.geoDivision.detail.title">Geo Division</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ geoDivision.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="ecommercePortalApp.geoDivision.name">Name</span></dt>
+        <dd>
+          <span>{{ geoDivision.name }}</span>
+        </dd>
+        <dt><span jhiTranslate="ecommercePortalApp.geoDivision.code">Code</span></dt>
+        <dd>
+          <span>{{ geoDivision.code }}</span>
+        </dd>
+        <dt><span jhiTranslate="ecommercePortalApp.geoDivision.level">Level</span></dt>
+        <dd>
+          <span>{{ geoDivision.level }}</span>
+        </dd>
+        <dt><span jhiTranslate="ecommercePortalApp.geoDivision.parent">Parent</span></dt>
+        <dd>
+          <div *ngIf="geoDivision.parent">
+            <a [routerLink]="['/geo-division', geoDivision.parent.id, 'view']">{{ geoDivision.parent.name }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/geo-division', geoDivision.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

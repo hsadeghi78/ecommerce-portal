@@ -1,0 +1,42 @@
+{
+  "ecommercePortalApp": {
+    "location": {
+      "home": {
+        "title": "Locations",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Location",
+        "createOrEditLabel": "Créer ou éditer un Location",
+        "notFound": "Aucun Location trouvé"
+      },
+      "created": "Un nouveau Location a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Location avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Location avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Location {{ id }} ?"
+      },
+      "detail": {
+        "title": "Location"
+      },
+      "id": "ID",
+      "typeClassId": "Type Class Id",
+      "title": "Title",
+      "lat": "Lat",
+      "lon": "Lon",
+      "street1": "Street 1",
+      "street2": "Street 2",
+      "street3": "Street 3",
+      "buildingNo": "Building No",
+      "buildingName": "Building Name",
+      "floor": "Floor",
+      "unit": "Unit",
+      "postalCode": "Postal Code",
+      "other": "Other",
+      "factor": "Factor",
+      "geoDivision": "Geo Division",
+      "party": "Party",
+      "help": {
+        "typeClassId": "typeClass WORK,HOME,BRANCH"
+      }
+    }
+  }
+}

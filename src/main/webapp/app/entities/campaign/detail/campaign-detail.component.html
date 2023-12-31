@@ -1,0 +1,60 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="campaign">
+      <h2 data-cy="campaignDetailsHeading"><span jhiTranslate="ecommercePortalApp.campaign.detail.title">Campaign</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ campaign.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="ecommercePortalApp.campaign.title">Title</span></dt>
+        <dd>
+          <span>{{ campaign.title }}</span>
+        </dd>
+        <dt><span jhiTranslate="ecommercePortalApp.campaign.startDate">Start Date</span></dt>
+        <dd>
+          <span>{{ campaign.startDate | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="ecommercePortalApp.campaign.endDate">End Date</span></dt>
+        <dd>
+          <span>{{ campaign.endDate | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="ecommercePortalApp.campaign.photo">Photo</span></dt>
+        <dd>
+          <div *ngIf="campaign.photo">
+            <a (click)="openFile(campaign.photo, campaign.photoContentType)">
+              <img [src]="'data:' + campaign.photoContentType + ';base64,' + campaign.photo" style="max-width: 100%" alt="campaign image" />
+            </a>
+            {{ campaign.photoContentType }}, {{ byteSize(campaign.photo) }}
+          </div>
+        </dd>
+        <dt><span jhiTranslate="ecommercePortalApp.campaign.description">Description</span></dt>
+        <dd>
+          <span>{{ campaign.description }}</span>
+        </dd>
+        <dt><span jhiTranslate="ecommercePortalApp.campaign.products">Products</span></dt>
+        <dd>
+          <span *ngFor="let products of campaign.products; let last = last">
+            <a [routerLink]="['/product', products.id, 'view']">{{ products.id }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/campaign', campaign.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

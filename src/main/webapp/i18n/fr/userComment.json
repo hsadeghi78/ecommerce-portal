@@ -1,0 +1,31 @@
+{
+  "ecommercePortalApp": {
+    "userComment": {
+      "home": {
+        "title": "UserComments",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau User Comment",
+        "createOrEditLabel": "Créer ou éditer un User Comment",
+        "notFound": "Aucun User Comment trouvé"
+      },
+      "created": "Un nouveau User Comment a été créé avec l'identifiant {{ param }}",
+      "updated": "Le User Comment avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le User Comment avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le User Comment {{ id }} ?"
+      },
+      "detail": {
+        "title": "User Comment"
+      },
+      "id": "ID",
+      "rating": "Rating",
+      "visible": "Visible",
+      "description": "Description",
+      "children": "Children",
+      "party": "Party",
+      "product": "Product",
+      "factor": "Factor",
+      "parent": "Parent"
+    }
+  }
+}

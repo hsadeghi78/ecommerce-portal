@@ -5,6 +5,10 @@ import static org.springframework.data.relational.core.query.Query.query;
 
 import com.hs.ec.portal.domain.Authority;
 import com.hs.ec.portal.domain.User;
+import com.hs.ec.portal.repository.rowmapper.PartyRowMapper;
+import com.hs.ec.portal.repository.rowmapper.UserRowMapper;
+import io.r2dbc.spi.Row;
+import io.r2dbc.spi.RowMetadata;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -16,7 +20,9 @@ import org.springframework.data.r2dbc.convert.R2dbcConverter;
 import org.springframework.data.r2dbc.core.R2dbcEntityTemplate;
 import org.springframework.data.r2dbc.repository.Query;
 import org.springframework.data.r2dbc.repository.R2dbcRepository;
+import org.springframework.data.relational.core.sql.*;
 import org.springframework.r2dbc.core.DatabaseClient;
+import org.springframework.r2dbc.core.RowsFetchSpec;
 import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -64,6 +70,8 @@ interface UserRepositoryInternal extends DeleteExtended<User> {
     Mono<User> findOneWithAuthoritiesByEmailIgnoreCase(String email);
 
     Flux<User> findAllWithAuthorities(Pageable pageable);
+
+    Mono<User> findOneWithEagerRelationships(String login);
 }
 
 class UserRepositoryInternalImpl implements UserRepositoryInternal {
@@ -72,10 +80,26 @@ class UserRepositoryInternalImpl implements UserRepositoryInternal {
     private final R2dbcEntityTemplate r2dbcEntityTemplate;
     private final R2dbcConverter r2dbcConverter;
 
-    public UserRepositoryInternalImpl(DatabaseClient db, R2dbcEntityTemplate r2dbcEntityTemplate, R2dbcConverter r2dbcConverter) {
+    private final EntityManager entityManager;
+    private final UserRowMapper userMapper;
+    private final PartyRowMapper partyMapper;
+    private static final Table entityTable = Table.aliased("jhi_user", "jhi_user");
+    private static final Table partyTable = Table.aliased("party", "e_party");
+
+    public UserRepositoryInternalImpl(
+        DatabaseClient db,
+        R2dbcEntityTemplate r2dbcEntityTemplate,
+        R2dbcConverter r2dbcConverter,
+        EntityManager entityManager,
+        UserRowMapper userMapper,
+        PartyRowMapper partyMapper
+    ) {
         this.db = db;
         this.r2dbcEntityTemplate = r2dbcEntityTemplate;
         this.r2dbcConverter = r2dbcConverter;
+        this.entityManager = entityManager;
+        this.userMapper = userMapper;
+        this.partyMapper = partyMapper;
     }
 
     @Override
@@ -86,6 +110,20 @@ class UserRepositoryInternalImpl implements UserRepositoryInternal {
     @Override
     public Mono<User> findOneWithAuthoritiesByEmailIgnoreCase(String email) {
         return findOneWithAuthoritiesBy("email", email.toLowerCase());
+    }
+
+    @Override
+    public Mono<User> findOneWithEagerRelationships(String login) {
+        Comparison whereClause = Conditions.isEqual(entityTable.column("login"), Conditions.just("'" + login + "'"));
+        return createQuery(null, whereClause)
+            .one()
+            .flatMap(user -> {
+                return findOneWithAuthoritiesByLogin(login)
+                    .flatMap(user1 -> {
+                        user.setAuthorities(user1.getAuthorities());
+                        return Mono.just(user);
+                    });
+            });
     }
 
     @Override
@@ -150,5 +188,31 @@ class UserRepositoryInternalImpl implements UserRepositoryInternal {
         );
 
         return user;
+    }
+
+    RowsFetchSpec<User> createQuery(Pageable pageable, Condition whereClause) {
+        List<Expression> columns = UserSqlHelper.getColumns(entityTable, EntityManager.ENTITY_ALIAS);
+        columns.addAll(PartySqlHelper.getColumns(partyTable, "party"));
+        //columns.addAll(UserAuthoritySqlHelper.getColumns(userAuthorityTable, "user_auth"));
+        SelectBuilder.SelectFromAndJoinCondition selectFrom = Select
+            .builder()
+            .select(columns)
+            .from(entityTable)
+            .leftOuterJoin(partyTable)
+            .on(Column.create("party_id", entityTable))
+            .equals(Column.create("id", partyTable));
+        //.leftOuterJoin(userAuthorityTable)
+        //.on(Column.create("id", entityTable))
+        //.equals(Column.create("user_id", userAuthorityTable));
+        // we do not support Criteria here for now as of https://github.com/jhipster/generator-jhipster/issues/18269
+        String select = entityManager.createSelect(selectFrom, User.class, pageable, whereClause);
+        return db.sql(select).map(this::process);
+    }
+
+    private User process(Row row, RowMetadata metadata) {
+        User entity = userMapper.apply(row, "e");
+        entity.setParty(partyMapper.apply(row, "party"));
+        //entity.setParty(partyMapper.apply(row, "user_authority"));
+        return entity;
     }
 }

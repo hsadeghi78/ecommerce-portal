@@ -1,0 +1,31 @@
+{
+  "ecommercePortalApp": {
+    "wallet": {
+      "home": {
+        "title": "Wallets",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Wallet",
+        "createOrEditLabel": "Créer ou éditer un Wallet",
+        "notFound": "Aucun Wallet trouvé"
+      },
+      "created": "Un nouveau Wallet a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Wallet avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Wallet avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Wallet {{ id }} ?"
+      },
+      "detail": {
+        "title": "Wallet"
+      },
+      "id": "ID",
+      "transTypeClassId": "Trans Type Class Id",
+      "stock": "Stock",
+      "description": "Description",
+      "deposit": "Deposit",
+      "withdrawal": "Withdrawal",
+      "help": {
+        "transTypeClassId": "TransactionTypeClass for ONLINE_RECHARGE, FACTOR_SETTLEMENT, SUBSCRIPTION_FEE"
+      }
+    }
+  }
+}
