@@ -80,6 +80,10 @@ class ProductResourceIT {
     private static final String DEFAULT_PHOTO_1_CONTENT_TYPE = "image/jpg";
     private static final String UPDATED_PHOTO_1_CONTENT_TYPE = "image/png";
 
+    private static final Long DEFAULT_NATIONALITY_CLASS_ID = 1L;
+    private static final Long UPDATED_NATIONALITY_CLASS_ID = 2L;
+    private static final Long SMALLER_NATIONALITY_CLASS_ID = 1L - 1L;
+
     private static final Double DEFAULT_COUNT = 1D;
     private static final Double UPDATED_COUNT = 2D;
     private static final Double SMALLER_COUNT = 1D - 1D;
@@ -188,6 +192,7 @@ class ProductResourceIT {
             .keywords(DEFAULT_KEYWORDS)
             .photo1(DEFAULT_PHOTO_1)
             .photo1ContentType(DEFAULT_PHOTO_1_CONTENT_TYPE)
+            .nationalityClassId(DEFAULT_NATIONALITY_CLASS_ID)
             .count(DEFAULT_COUNT)
             .discount(DEFAULT_DISCOUNT)
             .originalPrice(DEFAULT_ORIGINAL_PRICE)
@@ -228,6 +233,7 @@ class ProductResourceIT {
             .keywords(UPDATED_KEYWORDS)
             .photo1(UPDATED_PHOTO_1)
             .photo1ContentType(UPDATED_PHOTO_1_CONTENT_TYPE)
+            .nationalityClassId(UPDATED_NATIONALITY_CLASS_ID)
             .count(UPDATED_COUNT)
             .discount(UPDATED_DISCOUNT)
             .originalPrice(UPDATED_ORIGINAL_PRICE)
@@ -299,6 +305,7 @@ class ProductResourceIT {
         assertThat(testProduct.getKeywords()).isEqualTo(DEFAULT_KEYWORDS);
         assertThat(testProduct.getPhoto1()).isEqualTo(DEFAULT_PHOTO_1);
         assertThat(testProduct.getPhoto1ContentType()).isEqualTo(DEFAULT_PHOTO_1_CONTENT_TYPE);
+        assertThat(testProduct.getNationalityClassId()).isEqualTo(DEFAULT_NATIONALITY_CLASS_ID);
         assertThat(testProduct.getCount()).isEqualTo(DEFAULT_COUNT);
         assertThat(testProduct.getDiscount()).isEqualTo(DEFAULT_DISCOUNT);
         assertThat(testProduct.getOriginalPrice()).isEqualTo(DEFAULT_ORIGINAL_PRICE);
@@ -597,6 +604,8 @@ class ProductResourceIT {
             .value(hasItem(DEFAULT_PHOTO_1_CONTENT_TYPE))
             .jsonPath("$.[*].photo1")
             .value(hasItem(Base64Utils.encodeToString(DEFAULT_PHOTO_1)))
+            .jsonPath("$.[*].nationalityClassId")
+            .value(hasItem(DEFAULT_NATIONALITY_CLASS_ID.intValue()))
             .jsonPath("$.[*].count")
             .value(hasItem(DEFAULT_COUNT.doubleValue()))
             .jsonPath("$.[*].discount")
@@ -684,6 +693,8 @@ class ProductResourceIT {
             .value(is(DEFAULT_PHOTO_1_CONTENT_TYPE))
             .jsonPath("$.photo1")
             .value(is(Base64Utils.encodeToString(DEFAULT_PHOTO_1)))
+            .jsonPath("$.nationalityClassId")
+            .value(is(DEFAULT_NATIONALITY_CLASS_ID.intValue()))
             .jsonPath("$.count")
             .value(is(DEFAULT_COUNT.doubleValue()))
             .jsonPath("$.discount")
@@ -1307,6 +1318,90 @@ class ProductResourceIT {
 
         // Get all the productList where keywords does not contain UPDATED_KEYWORDS
         defaultProductShouldBeFound("keywords.doesNotContain=" + UPDATED_KEYWORDS);
+    }
+
+    @Test
+    void getAllProductsByNationalityClassIdIsEqualToSomething() {
+        // Initialize the database
+        productRepository.save(product).block();
+
+        // Get all the productList where nationalityClassId equals to DEFAULT_NATIONALITY_CLASS_ID
+        defaultProductShouldBeFound("nationalityClassId.equals=" + DEFAULT_NATIONALITY_CLASS_ID);
+
+        // Get all the productList where nationalityClassId equals to UPDATED_NATIONALITY_CLASS_ID
+        defaultProductShouldNotBeFound("nationalityClassId.equals=" + UPDATED_NATIONALITY_CLASS_ID);
+    }
+
+    @Test
+    void getAllProductsByNationalityClassIdIsInShouldWork() {
+        // Initialize the database
+        productRepository.save(product).block();
+
+        // Get all the productList where nationalityClassId in DEFAULT_NATIONALITY_CLASS_ID or UPDATED_NATIONALITY_CLASS_ID
+        defaultProductShouldBeFound("nationalityClassId.in=" + DEFAULT_NATIONALITY_CLASS_ID + "," + UPDATED_NATIONALITY_CLASS_ID);
+
+        // Get all the productList where nationalityClassId equals to UPDATED_NATIONALITY_CLASS_ID
+        defaultProductShouldNotBeFound("nationalityClassId.in=" + UPDATED_NATIONALITY_CLASS_ID);
+    }
+
+    @Test
+    void getAllProductsByNationalityClassIdIsNullOrNotNull() {
+        // Initialize the database
+        productRepository.save(product).block();
+
+        // Get all the productList where nationalityClassId is not null
+        defaultProductShouldBeFound("nationalityClassId.specified=true");
+
+        // Get all the productList where nationalityClassId is null
+        defaultProductShouldNotBeFound("nationalityClassId.specified=false");
+    }
+
+    @Test
+    void getAllProductsByNationalityClassIdIsGreaterThanOrEqualToSomething() {
+        // Initialize the database
+        productRepository.save(product).block();
+
+        // Get all the productList where nationalityClassId is greater than or equal to DEFAULT_NATIONALITY_CLASS_ID
+        defaultProductShouldBeFound("nationalityClassId.greaterThanOrEqual=" + DEFAULT_NATIONALITY_CLASS_ID);
+
+        // Get all the productList where nationalityClassId is greater than or equal to UPDATED_NATIONALITY_CLASS_ID
+        defaultProductShouldNotBeFound("nationalityClassId.greaterThanOrEqual=" + UPDATED_NATIONALITY_CLASS_ID);
+    }
+
+    @Test
+    void getAllProductsByNationalityClassIdIsLessThanOrEqualToSomething() {
+        // Initialize the database
+        productRepository.save(product).block();
+
+        // Get all the productList where nationalityClassId is less than or equal to DEFAULT_NATIONALITY_CLASS_ID
+        defaultProductShouldBeFound("nationalityClassId.lessThanOrEqual=" + DEFAULT_NATIONALITY_CLASS_ID);
+
+        // Get all the productList where nationalityClassId is less than or equal to SMALLER_NATIONALITY_CLASS_ID
+        defaultProductShouldNotBeFound("nationalityClassId.lessThanOrEqual=" + SMALLER_NATIONALITY_CLASS_ID);
+    }
+
+    @Test
+    void getAllProductsByNationalityClassIdIsLessThanSomething() {
+        // Initialize the database
+        productRepository.save(product).block();
+
+        // Get all the productList where nationalityClassId is less than DEFAULT_NATIONALITY_CLASS_ID
+        defaultProductShouldNotBeFound("nationalityClassId.lessThan=" + DEFAULT_NATIONALITY_CLASS_ID);
+
+        // Get all the productList where nationalityClassId is less than UPDATED_NATIONALITY_CLASS_ID
+        defaultProductShouldBeFound("nationalityClassId.lessThan=" + UPDATED_NATIONALITY_CLASS_ID);
+    }
+
+    @Test
+    void getAllProductsByNationalityClassIdIsGreaterThanSomething() {
+        // Initialize the database
+        productRepository.save(product).block();
+
+        // Get all the productList where nationalityClassId is greater than DEFAULT_NATIONALITY_CLASS_ID
+        defaultProductShouldNotBeFound("nationalityClassId.greaterThan=" + DEFAULT_NATIONALITY_CLASS_ID);
+
+        // Get all the productList where nationalityClassId is greater than SMALLER_NATIONALITY_CLASS_ID
+        defaultProductShouldBeFound("nationalityClassId.greaterThan=" + SMALLER_NATIONALITY_CLASS_ID);
     }
 
     @Test
@@ -2551,6 +2646,8 @@ class ProductResourceIT {
             .value(hasItem(DEFAULT_PHOTO_1_CONTENT_TYPE))
             .jsonPath("$.[*].photo1")
             .value(hasItem(Base64Utils.encodeToString(DEFAULT_PHOTO_1)))
+            .jsonPath("$.[*].nationalityClassId")
+            .value(hasItem(DEFAULT_NATIONALITY_CLASS_ID.intValue()))
             .jsonPath("$.[*].count")
             .value(hasItem(DEFAULT_COUNT.doubleValue()))
             .jsonPath("$.[*].discount")
@@ -2663,6 +2760,7 @@ class ProductResourceIT {
             .keywords(UPDATED_KEYWORDS)
             .photo1(UPDATED_PHOTO_1)
             .photo1ContentType(UPDATED_PHOTO_1_CONTENT_TYPE)
+            .nationalityClassId(UPDATED_NATIONALITY_CLASS_ID)
             .count(UPDATED_COUNT)
             .discount(UPDATED_DISCOUNT)
             .originalPrice(UPDATED_ORIGINAL_PRICE)
@@ -2703,6 +2801,7 @@ class ProductResourceIT {
         assertThat(testProduct.getKeywords()).isEqualTo(UPDATED_KEYWORDS);
         assertThat(testProduct.getPhoto1()).isEqualTo(UPDATED_PHOTO_1);
         assertThat(testProduct.getPhoto1ContentType()).isEqualTo(UPDATED_PHOTO_1_CONTENT_TYPE);
+        assertThat(testProduct.getNationalityClassId()).isEqualTo(UPDATED_NATIONALITY_CLASS_ID);
         assertThat(testProduct.getCount()).isEqualTo(UPDATED_COUNT);
         assertThat(testProduct.getDiscount()).isEqualTo(UPDATED_DISCOUNT);
         assertThat(testProduct.getOriginalPrice()).isEqualTo(UPDATED_ORIGINAL_PRICE);
@@ -2804,15 +2903,16 @@ class ProductResourceIT {
             .name(UPDATED_NAME)
             .brandClassId(UPDATED_BRAND_CLASS_ID)
             .description(UPDATED_DESCRIPTION)
-            .count(UPDATED_COUNT)
+            .nationalityClassId(UPDATED_NATIONALITY_CLASS_ID)
+            .discount(UPDATED_DISCOUNT)
             .originalPrice(UPDATED_ORIGINAL_PRICE)
-            .finalPrice(UPDATED_FINAL_PRICE)
-            .transportDate(UPDATED_TRANSPORT_DATE)
+            .publishDate(UPDATED_PUBLISH_DATE)
+            .currencyClassId(UPDATED_CURRENCY_CLASS_ID)
             .bonus(UPDATED_BONUS)
             .warrantyClassId(UPDATED_WARRANTY_CLASS_ID)
             .deliveryPlaceClassId(UPDATED_DELIVERY_PLACE_CLASS_ID)
             .paymentPlaceClassId(UPDATED_PAYMENT_PLACE_CLASS_ID)
-            .performance(UPDATED_PERFORMANCE);
+            .used(UPDATED_USED);
 
         webTestClient
             .patch()
@@ -2837,21 +2937,22 @@ class ProductResourceIT {
         assertThat(testProduct.getKeywords()).isEqualTo(DEFAULT_KEYWORDS);
         assertThat(testProduct.getPhoto1()).isEqualTo(DEFAULT_PHOTO_1);
         assertThat(testProduct.getPhoto1ContentType()).isEqualTo(DEFAULT_PHOTO_1_CONTENT_TYPE);
-        assertThat(testProduct.getCount()).isEqualTo(UPDATED_COUNT);
-        assertThat(testProduct.getDiscount()).isEqualTo(DEFAULT_DISCOUNT);
+        assertThat(testProduct.getNationalityClassId()).isEqualTo(UPDATED_NATIONALITY_CLASS_ID);
+        assertThat(testProduct.getCount()).isEqualTo(DEFAULT_COUNT);
+        assertThat(testProduct.getDiscount()).isEqualTo(UPDATED_DISCOUNT);
         assertThat(testProduct.getOriginalPrice()).isEqualTo(UPDATED_ORIGINAL_PRICE);
-        assertThat(testProduct.getFinalPrice()).isEqualTo(UPDATED_FINAL_PRICE);
-        assertThat(testProduct.getPublishDate()).isEqualTo(DEFAULT_PUBLISH_DATE);
-        assertThat(testProduct.getTransportDate()).isEqualTo(UPDATED_TRANSPORT_DATE);
-        assertThat(testProduct.getCurrencyClassId()).isEqualTo(DEFAULT_CURRENCY_CLASS_ID);
+        assertThat(testProduct.getFinalPrice()).isEqualTo(DEFAULT_FINAL_PRICE);
+        assertThat(testProduct.getPublishDate()).isEqualTo(UPDATED_PUBLISH_DATE);
+        assertThat(testProduct.getTransportDate()).isEqualTo(DEFAULT_TRANSPORT_DATE);
+        assertThat(testProduct.getCurrencyClassId()).isEqualTo(UPDATED_CURRENCY_CLASS_ID);
         assertThat(testProduct.getBonus()).isEqualTo(UPDATED_BONUS);
         assertThat(testProduct.getWarrantyClassId()).isEqualTo(UPDATED_WARRANTY_CLASS_ID);
         assertThat(testProduct.getDeliveryPlaceClassId()).isEqualTo(UPDATED_DELIVERY_PLACE_CLASS_ID);
         assertThat(testProduct.getPaymentPlaceClassId()).isEqualTo(UPDATED_PAYMENT_PLACE_CLASS_ID);
-        assertThat(testProduct.getPerformance()).isEqualTo(UPDATED_PERFORMANCE);
+        assertThat(testProduct.getPerformance()).isEqualTo(DEFAULT_PERFORMANCE);
         assertThat(testProduct.getOriginalityClassId()).isEqualTo(DEFAULT_ORIGINALITY_CLASS_ID);
         assertThat(testProduct.getSatisfaction()).isEqualTo(DEFAULT_SATISFACTION);
-        assertThat(testProduct.getUsed()).isEqualTo(DEFAULT_USED);
+        assertThat(testProduct.getUsed()).isEqualTo(UPDATED_USED);
     }
 
     @Test
@@ -2876,6 +2977,7 @@ class ProductResourceIT {
             .keywords(UPDATED_KEYWORDS)
             .photo1(UPDATED_PHOTO_1)
             .photo1ContentType(UPDATED_PHOTO_1_CONTENT_TYPE)
+            .nationalityClassId(UPDATED_NATIONALITY_CLASS_ID)
             .count(UPDATED_COUNT)
             .discount(UPDATED_DISCOUNT)
             .originalPrice(UPDATED_ORIGINAL_PRICE)
@@ -2915,6 +3017,7 @@ class ProductResourceIT {
         assertThat(testProduct.getKeywords()).isEqualTo(UPDATED_KEYWORDS);
         assertThat(testProduct.getPhoto1()).isEqualTo(UPDATED_PHOTO_1);
         assertThat(testProduct.getPhoto1ContentType()).isEqualTo(UPDATED_PHOTO_1_CONTENT_TYPE);
+        assertThat(testProduct.getNationalityClassId()).isEqualTo(UPDATED_NATIONALITY_CLASS_ID);
         assertThat(testProduct.getCount()).isEqualTo(UPDATED_COUNT);
         assertThat(testProduct.getDiscount()).isEqualTo(UPDATED_DISCOUNT);
         assertThat(testProduct.getOriginalPrice()).isEqualTo(UPDATED_ORIGINAL_PRICE);

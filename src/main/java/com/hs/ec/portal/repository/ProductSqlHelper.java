@@ -21,6 +21,7 @@ public class ProductSqlHelper {
         columns.add(Column.aliased("keywords", table, columnPrefix + "_keywords"));
         columns.add(Column.aliased("photo_1", table, columnPrefix + "_photo_1"));
         columns.add(Column.aliased("photo_1_content_type", table, columnPrefix + "_photo_1_content_type"));
+        columns.add(Column.aliased("nationality_class_id", table, columnPrefix + "_nationality_class_id"));
         columns.add(Column.aliased("count", table, columnPrefix + "_count"));
         columns.add(Column.aliased("discount", table, columnPrefix + "_discount"));
         columns.add(Column.aliased("original_price", table, columnPrefix + "_original_price"));

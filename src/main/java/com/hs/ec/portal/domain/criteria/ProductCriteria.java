@@ -57,6 +57,8 @@ public class ProductCriteria implements Serializable, Criteria {
 
     private StringFilter keywords;
 
+    private LongFilter nationalityClassId;
+
     private DoubleFilter count;
 
     private FloatFilter discount;
@@ -107,6 +109,7 @@ public class ProductCriteria implements Serializable, Criteria {
         this.languageClassId = other.languageClassId == null ? null : other.languageClassId.copy();
         this.description = other.description == null ? null : other.description.copy();
         this.keywords = other.keywords == null ? null : other.keywords.copy();
+        this.nationalityClassId = other.nationalityClassId == null ? null : other.nationalityClassId.copy();
         this.count = other.count == null ? null : other.count.copy();
         this.discount = other.discount == null ? null : other.discount.copy();
         this.originalPrice = other.originalPrice == null ? null : other.originalPrice.copy();
@@ -266,6 +269,21 @@ public class ProductCriteria implements Serializable, Criteria {
 
     public void setKeywords(StringFilter keywords) {
         this.keywords = keywords;
+    }
+
+    public LongFilter getNationalityClassId() {
+        return nationalityClassId;
+    }
+
+    public LongFilter nationalityClassId() {
+        if (nationalityClassId == null) {
+            nationalityClassId = new LongFilter();
+        }
+        return nationalityClassId;
+    }
+
+    public void setNationalityClassId(LongFilter nationalityClassId) {
+        this.nationalityClassId = nationalityClassId;
     }
 
     public DoubleFilter getCount() {
@@ -565,6 +583,7 @@ public class ProductCriteria implements Serializable, Criteria {
             Objects.equals(languageClassId, that.languageClassId) &&
             Objects.equals(description, that.description) &&
             Objects.equals(keywords, that.keywords) &&
+            Objects.equals(nationalityClassId, that.nationalityClassId) &&
             Objects.equals(count, that.count) &&
             Objects.equals(discount, that.discount) &&
             Objects.equals(originalPrice, that.originalPrice) &&
@@ -599,6 +618,7 @@ public class ProductCriteria implements Serializable, Criteria {
             languageClassId,
             description,
             keywords,
+            nationalityClassId,
             count,
             discount,
             originalPrice,
@@ -634,6 +654,7 @@ public class ProductCriteria implements Serializable, Criteria {
             (languageClassId != null ? "languageClassId=" + languageClassId + ", " : "") +
             (description != null ? "description=" + description + ", " : "") +
             (keywords != null ? "keywords=" + keywords + ", " : "") +
+            (nationalityClassId != null ? "nationalityClassId=" + nationalityClassId + ", " : "") +
             (count != null ? "count=" + count + ", " : "") +
             (discount != null ? "discount=" + discount + ", " : "") +
             (originalPrice != null ? "originalPrice=" + originalPrice + ", " : "") +

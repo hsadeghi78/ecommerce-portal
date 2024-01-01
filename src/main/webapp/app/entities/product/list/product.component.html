@@ -94,6 +94,12 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
+          <th scope="col" jhiSortBy="nationalityClassId">
+            <div class="d-flex">
+              <span jhiTranslate="ecommercePortalApp.product.nationalityClassId">Nationality Class Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
           <th scope="col" jhiSortBy="count">
             <div class="d-flex">
               <span jhiTranslate="ecommercePortalApp.product.count">Count</span>
@@ -224,6 +230,7 @@
             </a>
             <span *ngIf="product.photo1">{{ product.photo1ContentType }}, {{ byteSize(product.photo1) }}</span>
           </td>
+          <td>{{ product.nationalityClassId }}</td>
           <td>{{ product.count }}</td>
           <td>{{ product.discount }}</td>
           <td>{{ product.originalPrice }}</td>

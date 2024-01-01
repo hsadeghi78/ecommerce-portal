@@ -247,6 +247,24 @@
         <div class="mb-3">
           <label
             class="form-label"
+            jhiTranslate="ecommercePortalApp.product.nationalityClassId"
+            for="field_nationalityClassId"
+            [ngbTooltip]="'ecommercePortalApp.product.help.nationalityClassId' | translate"
+            >Nationality Class Id</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="nationalityClassId"
+            id="field_nationalityClassId"
+            data-cy="nationalityClassId"
+            formControlName="nationalityClassId"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label
+            class="form-label"
             jhiTranslate="ecommercePortalApp.product.count"
             for="field_count"
             [ngbTooltip]="'ecommercePortalApp.product.help.count' | translate"

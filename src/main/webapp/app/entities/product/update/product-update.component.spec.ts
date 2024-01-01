@@ -58,10 +58,10 @@ describe('Product Management Update Component', () => {
   describe('ngOnInit', () => {
     it('Should call Product query and add missing value', () => {
       const product: IProduct = { id: 456 };
-      const parent: IProduct = { id: 25274 };
+      const parent: IProduct = { id: 12172 };
       product.parent = parent;
 
-      const productCollection: IProduct[] = [{ id: 3928 }];
+      const productCollection: IProduct[] = [{ id: 18846 }];
       jest.spyOn(productService, 'query').mockReturnValue(of(new HttpResponse({ body: productCollection })));
       const additionalProducts = [parent];
       const expectedCollection: IProduct[] = [...additionalProducts, ...productCollection];
@@ -146,7 +146,7 @@ describe('Product Management Update Component', () => {
 
     it('Should update editForm', () => {
       const product: IProduct = { id: 456 };
-      const parent: IProduct = { id: 1926 };
+      const parent: IProduct = { id: 27599 };
       product.parent = parent;
       const documents: IFileDocument = { id: 26162 };
       product.documents = [documents];

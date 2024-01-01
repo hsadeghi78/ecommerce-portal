@@ -44,6 +44,9 @@
             <column name="photo_1_content_type" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
+            <column name="nationality_class_id" type="bigint" remarks="Iranian, Indian , ......">
+                <constraints nullable="true" />
+            </column>
             <column name="count" type="double" remarks="Product Count as per Party">
                 <constraints nullable="false" />
             </column>
@@ -147,6 +150,7 @@
             <column name="keywords" type="string"/>
             <column name="photo_1" type="blob"/>
             <column name="photo_1_content_type" type="string"/>
+            <column name="nationality_class_id" type="numeric"/>
             <column name="count" type="numeric"/>
             <column name="discount" type="numeric"/>
             <column name="original_price" type="numeric"/>

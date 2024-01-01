@@ -28,6 +28,7 @@ type ProductFormGroupContent = {
   keywords: FormControl<IProduct['keywords']>;
   photo1: FormControl<IProduct['photo1']>;
   photo1ContentType: FormControl<IProduct['photo1ContentType']>;
+  nationalityClassId: FormControl<IProduct['nationalityClassId']>;
   count: FormControl<IProduct['count']>;
   discount: FormControl<IProduct['discount']>;
   originalPrice: FormControl<IProduct['originalPrice']>;
@@ -91,6 +92,7 @@ export class ProductFormService {
         validators: [Validators.required],
       }),
       photo1ContentType: new FormControl(productRawValue.photo1ContentType),
+      nationalityClassId: new FormControl(productRawValue.nationalityClassId),
       count: new FormControl(productRawValue.count, {
         validators: [Validators.required],
       }),

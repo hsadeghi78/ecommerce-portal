@@ -17,6 +17,7 @@ export interface IProduct {
   keywords?: string | null;
   photo1?: string | null;
   photo1ContentType?: string | null;
+  nationalityClassId?: number | null;
   count?: number | null;
   discount?: number | null;
   originalPrice?: number | null;

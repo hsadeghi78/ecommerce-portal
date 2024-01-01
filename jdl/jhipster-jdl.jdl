@@ -184,8 +184,8 @@ entity Product(PRODUCT) {
     description String maxlength(2500),
     keywords String maxlength(500),
     photo1 ImageBlob required maxbytes(307200)
-
-
+    /** Iranian, Indian , ......*/
+    nationalityClassId Long,
 
 
     /** Product Count as per Party */
@@ -261,6 +261,8 @@ entity ProductHistory(PRICE_HISTORY) {
     description String maxlength(2500),
     keywords String maxlength(500),
     photo1 ImageBlob required maxbytes(307200)
+    /** Iranian, Indian , ......*/
+    nationalityClassId Long,
 
 
     /** Product Count as per Party */

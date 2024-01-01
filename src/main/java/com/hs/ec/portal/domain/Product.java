@@ -83,6 +83,12 @@ public class Product implements Serializable {
     private String photo1ContentType;
 
     /**
+     * Iranian, Indian , ......
+     */
+    @Column("nationality_class_id")
+    private Long nationalityClassId;
+
+    /**
      * Product Count as per Party
      */
     @NotNull(message = "must not be null")
@@ -408,6 +414,19 @@ public class Product implements Serializable {
 
     public void setPhoto1ContentType(String photo1ContentType) {
         this.photo1ContentType = photo1ContentType;
+    }
+
+    public Long getNationalityClassId() {
+        return this.nationalityClassId;
+    }
+
+    public Product nationalityClassId(Long nationalityClassId) {
+        this.setNationalityClassId(nationalityClassId);
+        return this;
+    }
+
+    public void setNationalityClassId(Long nationalityClassId) {
+        this.nationalityClassId = nationalityClassId;
     }
 
     public Double getCount() {
@@ -945,6 +964,7 @@ public class Product implements Serializable {
             ", keywords='" + getKeywords() + "'" +
             ", photo1='" + getPhoto1() + "'" +
             ", photo1ContentType='" + getPhoto1ContentType() + "'" +
+            ", nationalityClassId=" + getNationalityClassId() +
             ", count=" + getCount() +
             ", discount=" + getDiscount() +
             ", originalPrice=" + getOriginalPrice() +

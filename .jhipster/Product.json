@@ -61,6 +61,11 @@
       "fieldValidateRulesMaxbytes": "307200"
     },
     {
+      "documentation": "Iranian, Indian , ......",
+      "fieldName": "nationalityClassId",
+      "fieldType": "Long"
+    },
+    {
       "documentation": "Product Count as per Party",
       "fieldName": "count",
       "fieldType": "Double",
