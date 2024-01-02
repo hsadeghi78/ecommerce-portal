@@ -26,7 +26,14 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NewProductStepperComponent } from './entities/product/new/new-product-stepper/new-product-stepper.component';
+import { NewStepGeneralInfoComponent } from './entities/product/new/new-step-general-info/new-step-general-info.component';
+import { NewStepFinanceInfoComponent } from './entities/product/new/new-step-finance-info/new-step-finance-info.component';
+import { NewStepExtraInfoComponent } from './entities/product/new/new-step-extra-info/new-step-extra-info.component';
+import { NewStepImagesComponent } from './entities/product/new/new-step-images/new-step-images.component';
+import { MatButtonModule } from '@angular/material/button';
+import { MatStepperModule } from '@angular/material/stepper';
 
 @NgModule({
   imports: [
@@ -39,11 +46,14 @@ import { FormsModule } from '@angular/forms';
     HttpClientModule,
     MainModule,
     TranslationModule,
+    FormsModule,
+    ReactiveFormsModule,
     MatSlideToggleModule,
     MatSliderModule,
-    FormsModule,
     MatFormFieldModule,
     MatInputModule,
+    MatButtonModule,
+    MatStepperModule,
   ],
   providers: [
     Title,

@@ -6,6 +6,7 @@ import { ProductComponent } from './list/product.component';
 import { ProductDetailComponent } from './detail/product-detail.component';
 import { ProductUpdateComponent } from './update/product-update.component';
 import ProductResolve from './route/product-routing-resolve.service';
+import { NewProductStepperComponent } from './new/new-product-stepper/new-product-stepper.component';
 
 const productRoute: Routes = [
   {
@@ -26,7 +27,7 @@ const productRoute: Routes = [
   },
   {
     path: 'new',
-    component: ProductUpdateComponent,
+    component: NewProductStepperComponent,
     resolve: {
       product: ProductResolve,
     },

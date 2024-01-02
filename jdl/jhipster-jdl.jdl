@@ -200,8 +200,7 @@ entity Product(PRODUCT) {
     transportDate LocalDate required,
     /** such as IRR,IRT, AED,USD and ..... */
     currencyClassId Long required,
-    /** such as fa_IR, en_US, ar_AE, ar_SA and ..... */
-    languageClassId Long required,
+
     bonus Float,
     /** warrantyClass, ORIGINALITY, KARABI_KALA, BATRY, DURATION(1Year,2year)*/
     warrantyClassId Long,
@@ -277,8 +276,7 @@ entity ProductHistory(PRICE_HISTORY) {
     transportDate LocalDate required,
     /** such as IRR,IRT, AED,USD and ..... */
     currencyClassId Long required,
-    /** such as fa_IR, en_US, ar_AE, ar_SA and ..... */
-    languageClassId Long required,
+
     bonus Float,
     /** warrantyClass, ORIGINALITY, KARABI_KALA, BATRY, DURATION(1Year,2year)*/
     warrantyClassId Long,

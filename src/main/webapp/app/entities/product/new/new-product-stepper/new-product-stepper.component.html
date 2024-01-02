@@ -1,0 +1,28 @@
+<p>new-product-stepper works!</p>
+
+<mat-stepper orientation="vertical" [linear]="false" #stepper>
+  <mat-step [stepControl]="stepNewProdGeneralInfoForm">
+    <ng-template matStepLabel>stepNewProdGeneralInfoForm</ng-template>
+    <jhi-new-step-general-info #stepNewProdGeneralInfo></jhi-new-step-general-info>
+  </mat-step>
+  <mat-step [stepControl]="stepNewProdExtraInfoForm">
+    <ng-template matStepLabel>stepNewProdExtraInfoForm</ng-template>
+    <jhi-new-step-extra-info #stepNewProdExtraInfo></jhi-new-step-extra-info>
+  </mat-step>
+  <mat-step [stepControl]="stepNewProdFincInfoForm">
+    <ng-template matStepLabel>stepNewProdFincInfoForm</ng-template>
+    <jhi-new-step-finance-info #stepNewProdFincInfo></jhi-new-step-finance-info>
+  </mat-step>
+  <mat-step [stepControl]="stepNewProdImagesForm">
+    <ng-template matStepLabel>stepNewProdImagesForm</ng-template>
+    <jhi-new-step-images #stepNewProdImages></jhi-new-step-images>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Done</ng-template>
+    <p>You are now done.</p>
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button (click)="stepper.reset()">Reset</button>
+    </div>
+  </mat-step>
+</mat-stepper>
