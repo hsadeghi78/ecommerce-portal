@@ -2,7 +2,372 @@
 <form [formGroup]="generalInfoForm">
   <ng-template matStepLabel>Fill out your name</ng-template>
 
+  <mat-form-field appearance="outline" class="w-100">
+    <mat-label jhiTranslate="ecommercePortalApp.product.name" for="field_name">Name</mat-label>
+    <input matInput id="field_name" type="text" name="name" data-cy="name" formControlName="name" />
+    <div *ngIf="generalInfoForm.get('name')!.invalid && (generalInfoForm.get('name')!.dirty || generalInfoForm.get('name')!.touched)">
+      <small class="form-text text-danger" *ngIf="generalInfoForm.get('name')?.errors?.required" jhiTranslate="entity.validation.required"
+        >This field is required.</small
+      >
+      <small
+        class="form-text text-danger"
+        *ngIf="generalInfoForm.get('name')?.errors?.maxlength"
+        jhiTranslate="entity.validation.maxlength"
+        [translateValues]="{ max: 500 }"
+        >This field cannot be longer than 500 characters.</small
+      >
+    </div>
+  </mat-form-field>
+
+  <!--<div class="mb-3">
+    <label
+      class="form-label"
+      jhiTranslate="ecommercePortalApp.product.typeClassId"
+      for="field_typeClassId"
+      [ngbTooltip]="'ecommercePortalApp.product.help.typeClassId' | translate"
+    >Type Class Id</label
+    >
+    <input
+      type="number"
+      class="form-control"
+      name="typeClassId"
+      id="field_typeClassId"
+      data-cy="typeClassId"
+      formControlName="typeClassId"
+    />
+  </div>-->
+
+  <mat-form-field appearance="outline" class="w-100">
+    <mat-label
+      jhiTranslate="ecommercePortalApp.product.brandClassId"
+      for="field_brandClassId"
+      [ngbTooltip]="'ecommercePortalApp.product.help.brandClassId' | translate"
+      >Brand Class Id</mat-label
+    >
+    <mat-select name="brandClassId" id="field_brandClassId" data-cy="brandClassId" formControlName="brandClassId">
+      <mat-option *ngFor="let cls of classBrand" [value]="cls.id">{{ cls.title }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="w-100">
+    <mat-label
+      class="form-label"
+      jhiTranslate="ecommercePortalApp.product.sizee"
+      for="field_sizee"
+      [ngbTooltip]="'ecommercePortalApp.product.help.sizee' | translate"
+      >Sizee</mat-label
+    >
+    <input matInput type="text" name="sizee" id="field_sizee" data-cy="sizee" formControlName="sizee" />
+    <div *ngIf="generalInfoForm.get('sizee')!.invalid && (generalInfoForm.get('sizee')!.dirty || generalInfoForm.get('sizee')!.touched)">
+      <small
+        class="form-text text-danger"
+        *ngIf="generalInfoForm.get('sizee')?.errors?.maxlength"
+        jhiTranslate="entity.validation.maxlength"
+        [translateValues]="{ max: 100 }"
+        >This field cannot be longer than 100 characters.</small
+      >
+    </div>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="w-100">
+    <mat-label
+      jhiTranslate="ecommercePortalApp.product.regularSizeClassId"
+      for="field_regularSizeClassId"
+      [ngbTooltip]="'ecommercePortalApp.product.help.regularSizeClassId' | translate"
+      >Regular Size Class Id</mat-label
+    >
+    <mat-select name="regularSizeClassId" id="field_regularSizeClassId" data-cy="regularSizeClassId" formControlName="regularSizeClassId">
+      <mat-option *ngFor="let cls of classRegSize" [value]="cls.id">{{ cls.title }}</mat-option>
+    </mat-select>
+    <div
+      *ngIf="
+        generalInfoForm.get('regularSizeClassId')!.invalid &&
+        (generalInfoForm.get('regularSizeClassId')!.dirty || generalInfoForm.get('regularSizeClassId')!.touched)
+      "
+    >
+      <small
+        class="form-text text-danger"
+        *ngIf="generalInfoForm.get('regularSizeClassId')?.errors?.required"
+        jhiTranslate="entity.validation.required"
+        >This field is required.</small
+      >
+    </div>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="w-100">
+    <mat-label
+      jhiTranslate="ecommercePortalApp.product.languageClassId"
+      for="field_languageClassId"
+      [ngbTooltip]="'ecommercePortalApp.product.help.languageClassId' | translate"
+      >Language Class Id</mat-label
+    >
+    <mat-select name="languageClassId" id="field_languageClassId" data-cy="languageClassId" formControlName="languageClassId">
+      <mat-option *ngFor="let cls of classLanguage" [value]="cls.id">{{ cls.title }}</mat-option>
+    </mat-select>
+    <div
+      *ngIf="
+        generalInfoForm.get('languageClassId')!.invalid &&
+        (generalInfoForm.get('languageClassId')!.dirty || generalInfoForm.get('languageClassId')!.touched)
+      "
+    >
+      <small
+        class="form-text text-danger"
+        *ngIf="generalInfoForm.get('languageClassId')?.errors?.required"
+        jhiTranslate="entity.validation.required"
+        >This field is required.</small
+      >
+    </div>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="w-100">
+    <mat-label jhiTranslate="ecommercePortalApp.product.description" for="field_description">Description</mat-label>
+    <input matInput name="description" id="field_description" data-cy="description" formControlName="description" />
+    <div
+      *ngIf="
+        generalInfoForm.get('description')!.invalid &&
+        (generalInfoForm.get('description')!.dirty || generalInfoForm.get('description')!.touched)
+      "
+    >
+      <small
+        class="form-text text-danger"
+        *ngIf="generalInfoForm.get('description')?.errors?.maxlength"
+        jhiTranslate="entity.validation.maxlength"
+        [translateValues]="{ max: 2500 }"
+        >This field cannot be longer than 2500 characters.</small
+      >
+    </div>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="w-100">
+    <mat-label
+      jhiTranslate="ecommercePortalApp.product.keywords"
+      for="field_keywords"
+      [ngbTooltip]="'ecommercePortalApp.product.help.keywords' | translate"
+      >Keywords</mat-label
+    >
+    <input matInput type="text" name="keywords" id="field_keywords" data-cy="keywords" formControlName="keywords" />
+    <div
+      *ngIf="
+        generalInfoForm.get('keywords')!.invalid && (generalInfoForm.get('keywords')!.dirty || generalInfoForm.get('keywords')!.touched)
+      "
+    >
+      <small
+        class="form-text text-danger"
+        *ngIf="generalInfoForm.get('keywords')?.errors?.maxlength"
+        jhiTranslate="entity.validation.maxlength"
+        [translateValues]="{ max: 500 }"
+        >This field cannot be longer than 500 characters.</small
+      >
+    </div>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="w-100">
+    <mat-label
+      jhiTranslate="ecommercePortalApp.product.nationalityClassId"
+      for="field_nationalityClassId"
+      [ngbTooltip]="'ecommercePortalApp.product.help.nationalityClassId' | translate"
+      >Nationality Class Id</mat-label
+    >
+    <mat-select name="nationalityClassId" id="field_nationalityClassId" data-cy="nationalityClassId" formControlName="nationalityClassId">
+      <mat-option *ngFor="let cls of classNationality" [value]="cls.id">{{ cls.title }}</mat-option>
+    </mat-select>
+    <div
+      *ngIf="
+        generalInfoForm.get('languageClassId')!.invalid &&
+        (generalInfoForm.get('languageClassId')!.dirty || generalInfoForm.get('languageClassId')!.touched)
+      "
+    >
+      <small
+        class="form-text text-danger"
+        *ngIf="generalInfoForm.get('languageClassId')?.errors?.required"
+        jhiTranslate="entity.validation.required"
+        >This field is required.</small
+      >
+    </div>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="w-100">
+    <mat-label
+      jhiTranslate="ecommercePortalApp.product.count"
+      for="field_count"
+      [ngbTooltip]="'ecommercePortalApp.product.help.count' | translate"
+      >Count</mat-label
+    >
+    <input matInput type="number" name="count" id="field_count" data-cy="count" formControlName="count" />
+    <div *ngIf="generalInfoForm.get('count')!.invalid && (generalInfoForm.get('count')!.dirty || generalInfoForm.get('count')!.touched)">
+      <small class="form-text text-danger" *ngIf="generalInfoForm.get('count')?.errors?.required" jhiTranslate="entity.validation.required"
+        >This field is required.</small
+      >
+      <small class="form-text text-danger" [hidden]="!generalInfoForm.get('count')?.errors?.number" jhiTranslate="entity.validation.number"
+        >This field should be a number.</small
+      >
+    </div>
+  </mat-form-field>
+
+  <div class="mb-3">
+    <label class="form-label" jhiTranslate="ecommercePortalApp.product.publishDate" for="field_publishDate">Publish Date</label>
+    <div class="input-group">
+      <input
+        id="field_publishDate"
+        data-cy="publishDate"
+        type="text"
+        class="form-control"
+        name="publishDate"
+        ngbDatepicker
+        #publishDateDp="ngbDatepicker"
+        formControlName="publishDate"
+      />
+      <button type="button" class="btn btn-secondary" (click)="publishDateDp.toggle()">
+        <fa-icon icon="calendar-alt"></fa-icon>
+      </button>
+    </div>
+    <div
+      *ngIf="
+        generalInfoForm.get('publishDate')!.invalid &&
+        (generalInfoForm.get('publishDate')!.dirty || generalInfoForm.get('publishDate')!.touched)
+      "
+    >
+      <small
+        class="form-text text-danger"
+        *ngIf="generalInfoForm.get('publishDate')?.errors?.required"
+        jhiTranslate="entity.validation.required"
+        >This field is required.</small
+      >
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label
+      class="form-label"
+      jhiTranslate="ecommercePortalApp.product.transportDate"
+      for="field_transportDate"
+      [ngbTooltip]="'ecommercePortalApp.product.help.transportDate' | translate"
+      >Transport Date</label
+    >
+    <div class="input-group">
+      <input
+        id="field_transportDate"
+        data-cy="transportDate"
+        type="text"
+        class="form-control"
+        name="transportDate"
+        ngbDatepicker
+        #transportDateDp="ngbDatepicker"
+        formControlName="transportDate"
+      />
+      <button type="button" class="btn btn-secondary" (click)="transportDateDp.toggle()">
+        <fa-icon icon="calendar-alt"></fa-icon>
+      </button>
+    </div>
+    <div
+      *ngIf="
+        generalInfoForm.get('transportDate')!.invalid &&
+        (generalInfoForm.get('transportDate')!.dirty || generalInfoForm.get('transportDate')!.touched)
+      "
+    >
+      <small
+        class="form-text text-danger"
+        *ngIf="generalInfoForm.get('transportDate')?.errors?.required"
+        jhiTranslate="entity.validation.required"
+        >This field is required.</small
+      >
+    </div>
+  </div>
+
+  <mat-form-field appearance="outline" class="w-100">
+    <mat-label
+      jhiTranslate="ecommercePortalApp.product.warrantyClassId"
+      for="field_warrantyClassId"
+      [ngbTooltip]="'ecommercePortalApp.product.help.warrantyClassId' | translate"
+      >Warranty Class Id</mat-label
+    >
+    <mat-select name="warrantyClassId" id="field_warrantyClassId" data-cy="warrantyClassId" formControlName="warrantyClassId">
+      <mat-option *ngFor="let cls of classWarranty" [value]="cls.id">{{ cls.title }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="w-100">
+    <mat-label
+      jhiTranslate="ecommercePortalApp.product.deliveryPlaceClassId"
+      for="field_deliveryPlaceClassId"
+      [ngbTooltip]="'ecommercePortalApp.product.help.deliveryPlaceClassId' | translate"
+      >Delivery Place Class Id</mat-label
+    >
+    <mat-select
+      name="deliveryPlaceClassId"
+      id="field_deliveryPlaceClassId"
+      data-cy="deliveryPlaceClassId"
+      formControlName="deliveryPlaceClassId"
+    >
+      <mat-option *ngFor="let cls of classDelivery" [value]="cls.id">{{ cls.title }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="w-100">
+    <mat-label
+      class="form-label"
+      jhiTranslate="ecommercePortalApp.product.performance"
+      for="field_performance"
+      [ngbTooltip]="'ecommercePortalApp.product.help.performance' | translate"
+      >Performance</mat-label
+    >
+    <mat-select name="performance" formControlName="performance" id="field_performance" data-cy="performance">
+      <mat-option *ngFor="let performance of performanceValues" [value]="performance">{{
+        'ecommercePortalApp.Performance.' + performance | translate
+      }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="w-100">
+    <mat-label
+      class="form-label"
+      jhiTranslate="ecommercePortalApp.product.originalityClassId"
+      for="field_originalityClassId"
+      [ngbTooltip]="'ecommercePortalApp.product.help.originalityClassId' | translate"
+      >Originality Class Id</mat-label
+    >
+    <mat-select name="originalityClassId" id="field_originalityClassId" data-cy="originalityClassId" formControlName="originalityClassId">
+      <mat-option *ngFor="let cls of classOrginality" [value]="cls.id">{{ cls.title }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="w-100">
+    <mat-label
+      jhiTranslate="ecommercePortalApp.product.satisfaction"
+      for="field_satisfaction"
+      [ngbTooltip]="'ecommercePortalApp.product.help.satisfaction' | translate"
+      >Satisfaction</mat-label
+    >
+    <input matInput type="number" name="satisfaction" id="field_satisfaction" data-cy="satisfaction" formControlName="satisfaction" />
+  </mat-form-field>
+
+  <mat-checkbox name="used" id="field_used" data-cy="used" formControlName="used">
+    <label
+      class="form-label"
+      jhiTranslate="ecommercePortalApp.product.used"
+      for="field_used"
+      [ngbTooltip]="'ecommercePortalApp.product.help.used' | translate"
+      >Used</label
+    >
+  </mat-checkbox>
+
+  <!--<div class="mb-3">
+    <label
+      class="form-label"
+      jhiTranslate="ecommercePortalApp.product.used"
+      for="field_used"
+      [ngbTooltip]="'ecommercePortalApp.product.help.used' | translate"
+    >Used</label
+    >
+    <input type="checkbox" class="form-check" name="used" id="field_used" data-cy="used" formControlName="used" />
+    <div *ngIf="generalInfoForm.get('used')!.invalid && (generalInfoForm.get('used')!.dirty || generalInfoForm.get('used')!.touched)">
+      <small class="form-text text-danger" *ngIf="generalInfoForm.get('used')?.errors?.required" jhiTranslate="entity.validation.required"
+      >This field is required.</small
+      >
+    </div>
+  </div>-->
+
   <div>
-    <button mat-button matStepperNext>Next</button>
+    <button mat-stroked-button matStepperNext>Next</button>
   </div>
 </form>

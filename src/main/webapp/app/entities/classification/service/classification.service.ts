@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
-import { IClassification, NewClassification } from '../classification.model';
+import { IClassification, IVwClassification, NewClassification } from '../classification.model';
 
 export type PartialUpdateClassification = Partial<IClassification> & Pick<IClassification, 'id'>;
 
@@ -15,7 +15,7 @@ export type EntityArrayResponseType = HttpResponse<IClassification[]>;
 @Injectable({ providedIn: 'root' })
 export class ClassificationService {
   protected resourceUrl = this.applicationConfigService.getEndpointFor('api/classifications');
-
+  protected resourceVwUrl = this.applicationConfigService.getEndpointFor('api/vw-classifications');
   constructor(
     protected http: HttpClient,
     protected applicationConfigService: ApplicationConfigService,
@@ -56,6 +56,11 @@ export class ClassificationService {
 
   compareClassification(o1: Pick<IClassification, 'id'> | null, o2: Pick<IClassification, 'id'> | null): boolean {
     return o1 && o2 ? this.getClassificationIdentifier(o1) === this.getClassificationIdentifier(o2) : o1 === o2;
+  }
+
+  queryView(req?: any): Observable<HttpResponse<IVwClassification[]>> {
+    const options = createRequestOption(req);
+    return this.http.get<IVwClassification[]>(this.resourceVwUrl, { params: options, observe: 'response' });
   }
 
   addClassificationToCollectionIfMissing<Type extends Pick<IClassification, 'id'>>(

@@ -1,7 +1,7 @@
 <p>new-product-stepper works!</p>
 
 <mat-stepper orientation="vertical" [linear]="false" #stepper>
-  <mat-step [stepControl]="stepNewProdGeneralInfoForm">
+  <mat-step [stepControl]="stepNewProdGeneralInfoForm" [optional]="false">
     <ng-template matStepLabel>stepNewProdGeneralInfoForm</ng-template>
     <jhi-new-step-general-info #stepNewProdGeneralInfo></jhi-new-step-general-info>
   </mat-step>
